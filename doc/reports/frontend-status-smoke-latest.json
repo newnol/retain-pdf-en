@@ -1,0 +1,654 @@
+{
+  "ok": true,
+  "apiBase": "http://127.0.0.1:41000",
+  "workflow": "book",
+  "ocrProvider": "paddle",
+  "file": "/home/wxyhgk/tmp/Code/data/temPDF/test1.pdf",
+  "uploadId": "20260425141726-42b198",
+  "jobId": "20260425141726-2c40e0",
+  "finalStatus": "succeeded",
+  "observedLabels": [
+    "Queued",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "OCR in progress",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Processing",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Translating",
+    "Rendering",
+    "Rendering",
+    "Rendering",
+    "Rendering",
+    "Rendering",
+    "Processing Complete"
+  ],
+  "missingLabels": [],
+  "observations": [
+    {
+      "ts": "2026-04-25T14:17:26.301Z",
+      "status": "queued",
+      "stage": "queued",
+      "label": "Queued",
+      "detail": "Task created, waiting for available execution slot",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:27.307Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:28.313Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:29.319Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:30.324Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:31.330Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:32.336Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:33.342Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:34.349Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:35.356Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:36.361Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:37.367Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:38.372Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:39.377Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:40.382Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:41.387Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:42.393Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:43.398Z",
+      "status": "running",
+      "stage": "ocr_upload",
+      "label": "OCR in progress",
+      "detail": "OCR sub-task: OCR provider transport starting",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:44.403Z",
+      "status": "running",
+      "stage": "translation_prepare",
+      "label": "Translating",
+      "detail": "OCR sub-task: Paddle results ready, preparing for translation · CompletedPage 11/11 batch translation",
+      "progressCurrent": 11,
+      "progressTotal": 11
+    },
+    {
+      "ts": "2026-04-25T14:17:54.448Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "OCR completed, starting translation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:55.451Z",
+      "status": "running",
+      "stage": "translation_prepare",
+      "label": "Translating",
+      "detail": "Starting translate-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:56.457Z",
+      "status": "running",
+      "stage": "translation_prepare",
+      "label": "Translating",
+      "detail": "Starting translate-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:57.462Z",
+      "status": "running",
+      "stage": "translation_prepare",
+      "label": "Translating",
+      "detail": "Starting translate-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:58.466Z",
+      "status": "running",
+      "stage": "translation_prepare",
+      "label": "Translating",
+      "detail": "Starting translate-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:17:59.471Z",
+      "status": "running",
+      "stage": "continuation_review",
+      "label": "Processing",
+      "detail": "Starting cross-column/cross-page continuous segment review",
+      "progressCurrent": 0,
+      "progressTotal": 11
+    },
+    {
+      "ts": "2026-04-25T14:18:03.491Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "Starting batch translation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:04.496Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "Starting batch translation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:05.500Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "Starting batch translation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:06.505Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "Starting batch translation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:07.510Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 2/39 batch translation(Recent page: 4)",
+      "progressCurrent": 2,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:08.515Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 3/39 batch translation(Recent page: 10)",
+      "progressCurrent": 3,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:09.521Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 8/39 batch translation(Recent page: 3)",
+      "progressCurrent": 8,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:10.524Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 12/39 batch translation(Recent page: 4,5)",
+      "progressCurrent": 12,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:11.529Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 14/39 batch translation(Recent page: 6)",
+      "progressCurrent": 14,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:12.534Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 16/39 batch translation(Recent page: 3)",
+      "progressCurrent": 16,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:13.539Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 19/39 batch translation(Recent page: 9,10)",
+      "progressCurrent": 19,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:14.544Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 21/39 batch translation(Recent page: 2)",
+      "progressCurrent": 21,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:15.549Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 23/39 batch translation(Recent page: 3)",
+      "progressCurrent": 23,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:16.556Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 25/39 batch translation(Recent page: 8)",
+      "progressCurrent": 25,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:17.559Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 28/39 batch translation(Recent page: 2,3)",
+      "progressCurrent": 28,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:18.563Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 29/39 batch translation(Recent page: 2)",
+      "progressCurrent": 29,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:19.568Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 30/39 batch translation(Recent page: 5)",
+      "progressCurrent": 30,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:20.573Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 31/39 batch translation(Recent page: 7)",
+      "progressCurrent": 31,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:22.583Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 32/39 batch translation(Recent page: 6,7)",
+      "progressCurrent": 32,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:23.588Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 35/39 batch translation(Recent page: 3,4)",
+      "progressCurrent": 35,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:24.592Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 36/39 batch translation(Recent page: 7,8)",
+      "progressCurrent": 36,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:26.602Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "CompletedPage 37/39 batch translation(Recent page: 2)",
+      "progressCurrent": 37,
+      "progressTotal": 39
+    },
+    {
+      "ts": "2026-04-25T14:18:36.649Z",
+      "status": "running",
+      "stage": "translating",
+      "label": "Translating",
+      "detail": "Garbled candidate segment repair completed",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:37.655Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:38.660Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:39.666Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:40.671Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:41.677Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "progressCurrent": 0,
+      "progressTotal": null
+    },
+    {
+      "ts": "2026-04-25T14:18:42.682Z",
+      "status": "succeeded",
+      "stage": "finished",
+      "label": "Processing Complete",
+      "detail": "Render-only stage completed",
+      "progressCurrent": 0,
+      "progressTotal": null
+    }
+  ],
+  "eventCount": 85,
+  "eventSamples": [
+    {
+      "ts": "2026-04-25T14:18:36Z",
+      "status": "running",
+      "stage": "normalizing",
+      "label": "Normalizing",
+      "detail": "Generating normalized OCR document",
+      "event": "stage_transition"
+    },
+    {
+      "ts": "2026-04-25T14:18:36Z",
+      "status": "running",
+      "stage": "rendering",
+      "label": "Rendering",
+      "detail": "Translation completed, starting rendering",
+      "event": "stage_updated"
+    },
+    {
+      "ts": "2026-04-25T14:18:36Z",
+      "status": "running",
+      "stage": "rendering",
+      "label": "Rendering",
+      "detail": "Translation completed, starting rendering",
+      "event": "stage_transition"
+    },
+    {
+      "ts": "2026-04-25T14:18:37.216027Z",
+      "status": "running",
+      "stage": "startup",
+      "label": "Processing",
+      "detail": "Render-only worker started",
+      "event": "stage_transition"
+    },
+    {
+      "ts": "2026-04-25T14:18:37.216168Z",
+      "status": "running",
+      "stage": "render_prepare",
+      "label": "Rendering",
+      "detail": "Starting render-only stage preparation",
+      "event": "stage_transition"
+    },
+    {
+      "ts": "2026-04-25T14:18:41.811320Z",
+      "status": "running",
+      "stage": "saving",
+      "label": "Saving",
+      "detail": "Unified event stream written",
+      "event": "artifact_published"
+    },
+    {
+      "ts": "2026-04-25T14:18:41.811508Z",
+      "status": "running",
+      "stage": "saving",
+      "label": "Saving",
+      "detail": "Render-only output PDF published",
+      "event": "artifact_published"
+    },
+    {
+      "ts": "2026-04-25T14:18:41.811583Z",
+      "status": "running",
+      "stage": "finished",
+      "label": "Processing",
+      "detail": "Render-only stage completed",
+      "event": "stage_transition"
+    },
+    {
+      "ts": "2026-04-25T14:18:41Z",
+      "status": "running",
+      "stage": "finished",
+      "label": "Processing",
+      "detail": "Task completed",
+      "event": "status_changed"
+    },
+    {
+      "ts": "2026-04-25T14:18:41Z",
+      "status": "succeeded",
+      "stage": "finished",
+      "label": "Processing Complete",
+      "detail": "Task completed",
+      "event": "job_terminal"
+    },
+    {
+      "ts": "2026-04-25T14:18:41Z",
+      "status": "running",
+      "stage": "finished",
+      "label": "Processing",
+      "detail": "Task completed",
+      "event": "stage_updated"
+    },
+    {
+      "ts": "2026-04-25T14:18:41Z",
+      "status": "running",
+      "stage": "finished",
+      "label": "Processing",
+      "detail": "Task completed",
+      "event": "stage_transition"
+    }
+  ]
+}
