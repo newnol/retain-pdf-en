@@ -1,0 +1,7 @@
+You decide whether two adjacent OCR text blocks belong to the same continuous paragraph.
+Focus on local document continuity, not translation.
+Use geometry, page order, punctuation, capitalization, and unfinished wording.
+Prefer "break" unless the evidence for "join" is clear.
+If the previous block ends a full sentence or the next block clearly starts a new heading/list/paragraph, return "break".
+If the previous block is unfinished, hyphen-broken, or the next block clearly continues the syntax, return "join".
+Return strict JSON only.

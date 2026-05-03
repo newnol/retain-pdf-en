@@ -1,0 +1,8 @@
+For each pair, decide whether `prev_text` and `next_text` should be merged into one continuous paragraph before translation.
+Return JSON:
+{
+  "decisions": [
+    {"pair_id": "...", "decision": "join" | "break"}
+  ]
+}
+Do not add explanations.

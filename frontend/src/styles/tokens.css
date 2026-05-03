@@ -1,0 +1,16 @@
+:root {
+  --bg: #f5f5f7;
+  --paper: #ffffff;
+  --surface: rgba(255, 255, 255, 0.78);
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --line: #e5e5ea;
+  --accent: #0071e3;
+  --accent-weak: rgba(0, 113, 227, 0.12);
+  --danger: #ff3b30;
+  --danger-weak: rgba(255, 59, 48, 0.12);
+  --ok: #34c759;
+  --ok-weak: rgba(52, 199, 89, 0.12);
+  --warn: #ff9f0a;
+  --warn-weak: rgba(255, 159, 10, 0.14);
+}

@@ -1,0 +1,1949 @@
+{
+  "schema": "translation_case_bundle_v1",
+  "captured_at": "2026-04-16T08:11:51Z",
+  "fixture": {
+    "job_root": "20260416034152-d12925",
+    "item_id": "p006-b001",
+    "description": "amino coumarin red-shift paragraph kept_origin drift",
+    "case_artifact": "cases/20260416034152-d12925--p006-b001.json",
+    "expected_contains": [
+      "red shift",
+      "fluorescence",
+      "quantum yield"
+    ],
+    "required_terms": [
+      "551 nm"
+    ],
+    "forbidden_substrings": [],
+    "require_cjk": true,
+    "min_cjk_chars": 1,
+    "min_output_chars": 120,
+    "notes": ""
+  },
+  "saved": {
+    "snapshot": {
+      "job_root": "20260416034152-d12925",
+      "job_id": "20260416034152-d12925",
+      "item_id": "p006-b001",
+      "page_idx": 5,
+      "page_number": 6,
+      "page_path": "translated/page-006-deepseek.json",
+      "block_idx": 1,
+      "block_type": "text",
+      "math_mode": "direct_typst",
+      "source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "translated_text": "",
+      "source_preview": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluoresce…",
+      "translated_preview": "",
+      "classification_label": "skip_model_keep_origin",
+      "should_translate": false,
+      "skip_reason": "skip_model_keep_origin",
+      "final_status": "kept_origin",
+      "translation_diagnostics": {
+        "item_id": "p006-b001",
+        "page_idx": 5,
+        "route_path": [
+          "block_level",
+          "direct_typst",
+          "keep_origin"
+        ],
+        "error_trace": [
+          {
+            "type": "transport",
+            "code": "TRANSPORT_ERROR"
+          }
+        ],
+        "fallback_to": "keep_origin",
+        "degradation_reason": "transport_timeout_budget_exceeded",
+        "final_status": "kept_origin"
+      }
+    },
+    "item": {
+      "item_id": "p006-b001",
+      "page_idx": 5,
+      "block_idx": 1,
+      "block_type": "text",
+      "bbox": [
+        42,
+        88,
+        291,
+        194
+      ],
+      "source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "lines": [
+        {
+          "bbox": [
+            42,
+            88,
+            291,
+            194
+          ],
+          "spans": [
+            {
+              "type": "text",
+              "content": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "inline_equation",
+              "content": "551\\mathrm{nm}",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "text",
+              "content": ". Fused systems further shift the fluorescence to",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "inline_equation",
+              "content": "575\\mathrm{nm}",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "text",
+              "content": "(10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "ocr_sub_type": "body",
+        "normalized_sub_type": "body",
+        "structure_role": "body",
+        "raw_type": "text",
+        "tags": [],
+        "derived": {
+          "role": "",
+          "by": "",
+          "confidence": 0.0
+        },
+        "continuation_hint": {
+          "source": "",
+          "group_id": "",
+          "role": "",
+          "scope": "",
+          "reading_order": -1,
+          "confidence": 0.0
+        },
+        "source": {
+          "provider": "mineru",
+          "raw_page_index": 5,
+          "raw_path": "/pdf_info/5/para_blocks/1",
+          "raw_type": "text",
+          "raw_sub_type": "",
+          "raw_bbox": [
+            42,
+            88,
+            291,
+            194
+          ],
+          "raw_text_excerpt": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm}"
+        },
+        "structure_group": "",
+        "pair_with": ""
+      },
+      "ocr_continuation_source": "",
+      "ocr_continuation_group_id": "",
+      "ocr_continuation_role": "",
+      "ocr_continuation_scope": "",
+      "ocr_continuation_reading_order": -1,
+      "ocr_continuation_confidence": 0.0,
+      "layout_mode": "double",
+      "layout_split_x": 295.75,
+      "layout_zone": "left_column",
+      "layout_zone_rank": 1,
+      "layout_zone_size": 6,
+      "layout_boundary_role": "middle",
+      "math_mode": "direct_typst",
+      "protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "mixed_original_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "formula_map": [],
+      "protected_map": [],
+      "classification_label": "skip_model_keep_origin",
+      "should_translate": false,
+      "skip_reason": "skip_model_keep_origin",
+      "mixed_literal_action": "",
+      "mixed_literal_prefix": "",
+      "translation_unit_id": "p006-b001",
+      "translation_unit_kind": "single",
+      "translation_unit_member_ids": [
+        "p006-b001"
+      ],
+      "translation_unit_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "translation_unit_formula_map": [],
+      "translation_unit_protected_map": [],
+      "translation_unit_protected_translated_text": "",
+      "translation_unit_translated_text": "",
+      "protected_translated_text": "",
+      "translated_text": "",
+      "continuation_group": "",
+      "continuation_prev_text": "",
+      "continuation_next_text": "",
+      "continuation_decision": "",
+      "continuation_candidate_prev_id": "",
+      "continuation_candidate_next_id": "",
+      "group_protected_source_text": "",
+      "group_formula_map": [],
+      "group_protected_map": [],
+      "group_protected_translated_text": "",
+      "group_translated_text": "",
+      "final_status": "kept_origin",
+      "translation_diagnostics": {
+        "item_id": "p006-b001",
+        "page_idx": 5,
+        "route_path": [
+          "block_level",
+          "direct_typst",
+          "keep_origin"
+        ],
+        "error_trace": [
+          {
+            "type": "transport",
+            "code": "TRANSPORT_ERROR"
+          }
+        ],
+        "fallback_to": "keep_origin",
+        "degradation_reason": "transport_timeout_budget_exceeded",
+        "final_status": "kept_origin"
+      },
+      "candidate_pair_prev_id": "",
+      "candidate_pair_next_id": ""
+    }
+  },
+  "replay_input": {
+    "job_root": "20260416034152-d12925",
+    "job_id": "20260416034152-d12925",
+    "item_id": "p006-b001",
+    "page_idx": 5,
+    "page_path": "translated/page-006-deepseek.json",
+    "spec": {
+      "mode": "sci",
+      "math_mode": "direct_typst",
+      "skip_title_translation": true,
+      "rule_profile_name": "general_sci",
+      "custom_rules_text": "",
+      "classify_batch_size": 12,
+      "workers": 100,
+      "model": "deepseek-chat",
+      "base_url": "https://api.deepseek.com/v1",
+      "glossary_entries": [],
+      "credential_ref": "env:RETAIN_TRANSLATION_API_KEY"
+    },
+    "page_payload": [
+      {
+        "item_id": "p006-b000",
+        "page_idx": 5,
+        "block_idx": 0,
+        "block_type": "text",
+        "bbox": [
+          43,
+          63,
+          291,
+          85
+        ],
+        "source_text": "inductive and resonance, however, on phenylenes they act as weak EDGs.",
+        "lines": [
+          {
+            "bbox": [
+              43,
+              63,
+              291,
+              85
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "inductive and resonance, however, on phenylenes they act as weak EDGs.",
+                "bbox": [
+                  43,
+                  63,
+                  291,
+                  85
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/0",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              43,
+              63,
+              291,
+              85
+            ],
+            "raw_text_excerpt": "inductive and resonance, however, on phenylenes they act as weak EDGs."
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 0,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "head",
+        "math_mode": "direct_typst",
+        "protected_source_text": "inductive and resonance, however, on phenylenes they act as weak EDGs.",
+        "mixed_original_protected_source_text": "inductive and resonance, however, on phenylenes they act as weak EDGs.",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "__cg__:cg-005-005",
+        "translation_unit_kind": "group",
+        "translation_unit_member_ids": [
+          "p005-b079",
+          "p006-b000"
+        ],
+        "translation_unit_protected_source_text": "The 6-position has HOMO contributions, but no LUMO contributions, therefore, donors narrow the HOMO-LUMO gap. Addition of weakly \\pi -donating fluorine atoms on 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance, however, on phenylenes they act as weak EDGs.",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "Position 6 contributes to the HOMO but not to the LUMO, so donor groups narrow the HOMO-LUMO gap.Introducing weakly $\\pi$-donating fluorine atoms at position 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance effects, but in phenylene compounds they act as weak electron-donating groups.",
+        "translation_unit_translated_text": "Position 6 contributes to the HOMO but not to the LUMO, so donor groups narrow the HOMO-LUMO gap.Introducing weakly $\\pi$-donating fluorine atoms at position 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance effects, but in phenylene compounds they act as weak electron-donating groups.",
+        "protected_translated_text": "competition, but in phenylene compounds they act as weak electron-donating groups.",
+        "translated_text": "competition, but in phenylene compounds they act as weak electron-donating groups.",
+        "continuation_group": "cg-005-005",
+        "continuation_prev_text": "The 6-position has HOMO contributions, but no LUMO contributions, therefore, donors narrow the HOMO-LUMO gap. Addition of weakly \\pi -donating fluorine atoms on 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing",
+        "continuation_next_text": "",
+        "continuation_decision": "joined",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "The 6-position has HOMO contributions, but no LUMO contributions, therefore, donors narrow the HOMO-LUMO gap. Addition of weakly \\pi -donating fluorine atoms on 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance, however, on phenylenes they act as weak EDGs.",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "Position 6 contributes to the HOMO but not to the LUMO, so donor groups narrow the HOMO-LUMO gap.Introducing weakly $\\pi$-donating fluorine atoms at position 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance effects, but in phenylene compounds they act as weak electron-donating groups.",
+        "group_translated_text": "Position 6 contributes to the HOMO but not to the LUMO, so donor groups narrow the HOMO-LUMO gap.Introducing weakly $\\pi$-donating fluorine atoms at position 7 slightly red-shifts the fluorescence (8).[24,25] Halogens have competing inductive and resonance effects, but in phenylene compounds they act as weak electron-donating groups.",
+        "final_status": "translated",
+        "translation_diagnostics": {},
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b001",
+        "page_idx": 5,
+        "block_idx": 1,
+        "block_type": "text",
+        "bbox": [
+          42,
+          88,
+          291,
+          194
+        ],
+        "source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+        "lines": [
+          {
+            "bbox": [
+              42,
+              88,
+              291,
+              194
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to",
+                "bbox": [
+                  42,
+                  88,
+                  291,
+                  194
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "551\\mathrm{nm}",
+                "bbox": [
+                  42,
+                  88,
+                  291,
+                  194
+                ]
+              },
+              {
+                "type": "text",
+                "content": ". Fused systems further shift the fluorescence to",
+                "bbox": [
+                  42,
+                  88,
+                  291,
+                  194
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "575\\mathrm{nm}",
+                "bbox": [
+                  42,
+                  88,
+                  291,
+                  194
+                ]
+              },
+              {
+                "type": "text",
+                "content": "(10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+                "bbox": [
+                  42,
+                  88,
+                  291,
+                  194
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/1",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              42,
+              88,
+              291,
+              194
+            ],
+            "raw_text_excerpt": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm}"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 1,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "middle",
+        "math_mode": "direct_typst",
+        "protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+        "mixed_original_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "skip_model_keep_origin",
+        "should_translate": false,
+        "skip_reason": "skip_model_keep_origin",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "p006-b001",
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [
+          "p006-b001"
+        ],
+        "translation_unit_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "",
+        "translation_unit_translated_text": "",
+        "protected_translated_text": "",
+        "translated_text": "",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "",
+        "group_translated_text": "",
+        "final_status": "kept_origin",
+        "translation_diagnostics": {
+          "item_id": "p006-b001",
+          "page_idx": 5,
+          "route_path": [
+            "block_level",
+            "direct_typst",
+            "keep_origin"
+          ],
+          "error_trace": [
+            {
+              "type": "transport",
+              "code": "TRANSPORT_ERROR"
+            }
+          ],
+          "fallback_to": "keep_origin",
+          "degradation_reason": "transport_timeout_budget_exceeded",
+          "final_status": "kept_origin"
+        },
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b002",
+        "page_idx": 5,
+        "block_idx": 2,
+        "block_type": "text",
+        "bbox": [
+          43,
+          195,
+          291,
+          337
+        ],
+        "source_text": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine because substitution of the phenol in fluorescein yields a non-fluorescent lactone form.[6] Therefore, the main way to modulate fluorescein fluorescence is through halogenation.[6] Fluorination (12) and chlorination (13) of 11 prompts a modest bathochromic shift as they are weak \\pi -donors.[4,28,29] lodination (14) causes a further 10\\mathrm{nm} shift.[29] However overall, the result is a mere 41\\mathrm{nm} shift in fluorescence from 11. The lack of fluorescein tunability shifted attention to the aminated rhodamine scaffold.",
+        "lines": [
+          {
+            "bbox": [
+              43,
+              195,
+              291,
+              337
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine because substitution of the phenol in fluorescein yields a non-fluorescent lactone form.[6] Therefore, the main way to modulate fluorescein fluorescence is through halogenation.[6] Fluorination (12) and chlorination (13) of 11 prompts a modest bathochromic shift as they are weak",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "\\pi",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "text",
+                "content": "-donors.[4,28,29] lodination (14) causes a further",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "10\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "text",
+                "content": "shift.[29] However overall, the result is a mere",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "41\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              },
+              {
+                "type": "text",
+                "content": "shift in fluorescence from 11. The lack of fluorescein tunability shifted attention to the aminated rhodamine scaffold.",
+                "bbox": [
+                  43,
+                  195,
+                  291,
+                  337
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/2",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              43,
+              195,
+              291,
+              337
+            ],
+            "raw_text_excerpt": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine becaus"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 2,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "middle",
+        "math_mode": "direct_typst",
+        "protected_source_text": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine because substitution of the phenol in fluorescein yields a non-fluorescent lactone form.[6] Therefore, the main way to modulate fluorescein fluorescence is through halogenation.[6] Fluorination (12) and chlorination (13) of 11 prompts a modest bathochromic shift as they are weak \\pi -donors.[4,28,29] lodination (14) causes a further 10\\mathrm{nm} shift.[29] However overall, the result is a mere 41\\mathrm{nm} shift in fluorescence from 11. The lack of fluorescein tunability shifted attention to the aminated rhodamine scaffold.",
+        "mixed_original_protected_source_text": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine because substitution of the phenol in fluorescein yields a non-fluorescent lactone form.[6] Therefore, the main way to modulate fluorescein fluorescence is through halogenation.[6] Fluorination (12) and chlorination (13) of 11 prompts a modest bathochromic shift as they are weak \\pi -donors.[4,28,29] lodination (14) causes a further 10\\mathrm{nm} shift.[29] However overall, the result is a mere 41\\mathrm{nm} shift in fluorescence from 11. The lack of fluorescein tunability shifted attention to the aminated rhodamine scaffold.",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "p006-b002",
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [
+          "p006-b002"
+        ],
+        "translation_unit_protected_source_text": "Fluorescein and Rhodamine. Fluorescein and rhodamine HOMO and LUMO orbital densities are shown in Figure 4. The photophysical properties of fluorescein are more difficult to tune than rhodamine because substitution of the phenol in fluorescein yields a non-fluorescent lactone form.[6] Therefore, the main way to modulate fluorescein fluorescence is through halogenation.[6] Fluorination (12) and chlorination (13) of 11 prompts a modest bathochromic shift as they are weak \\pi -donors.[4,28,29] lodination (14) causes a further 10\\mathrm{nm} shift.[29] However overall, the result is a mere 41\\mathrm{nm} shift in fluorescence from 11. The lack of fluorescein tunability shifted attention to the aminated rhodamine scaffold.",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "Fluorescein and Rhodamine. The HOMO and LUMO orbital densities of fluorescein and Rhodamine are shown in Figure 4. The photophysical properties of fluorescein are harder to tune than Rhodamine, because substitution on the phenol in fluorescein generates a non-fluorescent lactone form[6].Therefore, the main way to tune fluorescein fluorescence is through halogenation[6]. Fluorination($12$) and chlorination($13$) of compound $11$ cause modest redshift, as they are weak $\\pi$ donors[4,28,29]. Iodination($14$) leads to a further $10\\,\\mathrm{nm}$ shift[29]. Overall, this results in only a $41\\,\\mathrm{nm}$ shift of fluorescence from $11$. The lack of tunability of fluorescein shifted research focus to the aminated Rhodamine scaffold.",
+        "translation_unit_translated_text": "Fluorescein and Rhodamine. The HOMO and LUMO orbital densities of fluorescein and Rhodamine are shown in Figure 4. The photophysical properties of fluorescein are harder to tune than Rhodamine, because substitution on the phenol in fluorescein generates a non-fluorescent lactone form[6].Therefore, the main way to tune fluorescein fluorescence is through halogenation[6]. Fluorination($12$) and chlorination($13$) of compound $11$ cause modest redshift, as they are weak $\\pi$ donors[4,28,29]. Iodination($14$) leads to a further $10\\,\\mathrm{nm}$ shift[29]. Overall, this results in only a $41\\,\\mathrm{nm}$ shift of fluorescence from $11$. The lack of tunability of fluorescein shifted research focus to the aminated Rhodamine scaffold.",
+        "protected_translated_text": "Fluorescein and Rhodamine. The HOMO and LUMO orbital densities of fluorescein and Rhodamine are shown in Figure 4. The photophysical properties of fluorescein are harder to tune than Rhodamine, because substitution on the phenol in fluorescein generates a non-fluorescent lactone form[6].Therefore, the main way to tune fluorescein fluorescence is through halogenation[6]. Fluorination($12$) and chlorination($13$) of compound $11$ cause modest redshift, as they are weak $\\pi$ donors[4,28,29]. Iodination($14$) leads to a further $10\\,\\mathrm{nm}$ shift[29]. Overall, this results in only a $41\\,\\mathrm{nm}$ shift of fluorescence from $11$. The lack of tunability of fluorescein shifted research focus to the aminated Rhodamine scaffold.",
+        "translated_text": "Fluorescein and Rhodamine. The HOMO and LUMO orbital densities of fluorescein and Rhodamine are shown in Figure 4. The photophysical properties of fluorescein are harder to tune than Rhodamine, because substitution on the phenol in fluorescein generates a non-fluorescent lactone form[6].Therefore, the main way to tune fluorescein fluorescence is through halogenation[6]. Fluorination($12$) and chlorination($13$) of compound $11$ cause modest redshift, as they are weak $\\pi$ donors[4,28,29]. Iodination($14$) leads to a further $10\\,\\mathrm{nm}$ shift[29]. Overall, this results in only a $41\\,\\mathrm{nm}$ shift of fluorescence from $11$. The lack of tunability of fluorescein shifted research focus to the aminated Rhodamine scaffold.",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "",
+        "group_translated_text": "",
+        "final_status": "translated",
+        "translation_diagnostics": {
+          "item_id": "p006-b002",
+          "page_idx": 5,
+          "route_path": [
+            "block_level",
+            "direct_typst"
+          ],
+          "output_mode_path": [
+            "plain_text"
+          ],
+          "fallback_to": "",
+          "degradation_reason": "",
+          "final_status": "translated"
+        },
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b003",
+        "page_idx": 5,
+        "block_idx": 3,
+        "block_type": "text",
+        "bbox": [
+          43,
+          338,
+          291,
+          457
+        ],
+        "source_text": "Rhodamine 110, 15, has an emission of 517~\\mathrm{nm} . When the donating ability of the amines are increased through methylation the fluorescence is shifted to 565~\\mathrm{nm} (16).[31] Heterocycle formation (17) provides optimal nitrogen lone pair conjugation with the \\pi -system, red-shifting the fluorescence to 588~\\mathrm{nm} .[32] In summary, red-shifting xanthone dye fluorescence is achieved by halogenation of fluorescein or increasing the donating ability of rhodamine nitrogens. The most significant emission red-shift of the xanthene scaffold, however, comes from heteroatom incorporation (Section 2.3).",
+        "lines": [
+          {
+            "bbox": [
+              43,
+              338,
+              291,
+              457
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "Rhodamine 110, 15, has an emission of",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "517~\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "text",
+                "content": ". When the donating ability of the amines are increased through methylation the fluorescence is shifted to",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "565~\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "text",
+                "content": "(16).[31] Heterocycle formation (17) provides optimal nitrogen lone pair conjugation with the",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "\\pi",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "text",
+                "content": "-system, red-shifting the fluorescence to",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "588~\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              },
+              {
+                "type": "text",
+                "content": ".[32] In summary, red-shifting xanthone dye fluorescence is achieved by halogenation of fluorescein or increasing the donating ability of rhodamine nitrogens. The most significant emission red-shift of the xanthene scaffold, however, comes from heteroatom incorporation (Section 2.3).",
+                "bbox": [
+                  43,
+                  338,
+                  291,
+                  457
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/3",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              43,
+              338,
+              291,
+              457
+            ],
+            "raw_text_excerpt": "Rhodamine 110, 15, has an emission of 517~\\mathrm{nm} . When the donating ability of the amines are increased through methylation the fluorescence is shifted to 565~\\mathrm{nm} (16).[31] Heterocycle f"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 3,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "middle",
+        "math_mode": "direct_typst",
+        "protected_source_text": "Rhodamine 110, 15, has an emission of 517~\\mathrm{nm} . When the donating ability of the amines are increased through methylation the fluorescence is shifted to 565~\\mathrm{nm} (16).[31] Heterocycle formation (17) provides optimal nitrogen lone pair conjugation with the \\pi -system, red-shifting the fluorescence to 588~\\mathrm{nm} .[32] In summary, red-shifting xanthone dye fluorescence is achieved by halogenation of fluorescein or increasing the donating ability of rhodamine nitrogens. The most significant emission red-shift of the xanthene scaffold, however, comes from heteroatom incorporation (Section 2.3).",
+        "mixed_original_protected_source_text": "Rhodamine 110, 15, has an emission of 517~\\mathrm{nm} . When the donating ability of the amines are increased through methylation the fluorescence is shifted to 565~\\mathrm{nm} (16).[31] Heterocycle formation (17) provides optimal nitrogen lone pair conjugation with the \\pi -system, red-shifting the fluorescence to 588~\\mathrm{nm} .[32] In summary, red-shifting xanthone dye fluorescence is achieved by halogenation of fluorescein or increasing the donating ability of rhodamine nitrogens. The most significant emission red-shift of the xanthene scaffold, however, comes from heteroatom incorporation (Section 2.3).",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "skip_model_keep_origin",
+        "should_translate": false,
+        "skip_reason": "skip_model_keep_origin",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "p006-b003",
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [
+          "p006-b003"
+        ],
+        "translation_unit_protected_source_text": "Rhodamine 110, 15, has an emission of 517~\\mathrm{nm} . When the donating ability of the amines are increased through methylation the fluorescence is shifted to 565~\\mathrm{nm} (16).[31] Heterocycle formation (17) provides optimal nitrogen lone pair conjugation with the \\pi -system, red-shifting the fluorescence to 588~\\mathrm{nm} .[32] In summary, red-shifting xanthone dye fluorescence is achieved by halogenation of fluorescein or increasing the donating ability of rhodamine nitrogens. The most significant emission red-shift of the xanthene scaffold, however, comes from heteroatom incorporation (Section 2.3).",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "",
+        "translation_unit_translated_text": "",
+        "protected_translated_text": "",
+        "translated_text": "",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "",
+        "group_translated_text": "",
+        "final_status": "kept_origin",
+        "translation_diagnostics": {
+          "item_id": "p006-b003",
+          "page_idx": 5,
+          "route_path": [
+            "block_level",
+            "direct_typst",
+            "keep_origin"
+          ],
+          "error_trace": [
+            {
+              "type": "transport",
+              "code": "TRANSPORT_ERROR"
+            }
+          ],
+          "fallback_to": "keep_origin",
+          "degradation_reason": "transport_timeout_budget_exceeded",
+          "final_status": "kept_origin"
+        },
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b004",
+        "page_idx": 5,
+        "block_idx": 4,
+        "block_type": "text",
+        "bbox": [
+          43,
+          459,
+          291,
+          589
+        ],
+        "source_text": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions on the 3- and 5-positions (Figure 5), indicating EDGs would result in a red-shift in fluorescence. Two EDGs in the 3- and 5-positions in 19 red-shifts the fluorescence from unsubstituted BODIPY 18.[34] This effect is more significant when electron donating ability is increased. Switching chlorides of 20 to methoxy groups (21) only slightly red-shifts the fluorescence, but the effect is more dramatic with substitution of one (22) or two (23) amines.[35]",
+        "lines": [
+          {
+            "bbox": [
+              43,
+              459,
+              291,
+              589
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions on the 3- and 5-positions (Figure 5), indicating EDGs would result in a red-shift in fluorescence. Two EDGs in the 3- and 5-positions in 19 red-shifts the fluorescence from unsubstituted BODIPY 18.[34] This effect is more significant when electron donating ability is increased. Switching chlorides of 20 to methoxy groups (21) only slightly red-shifts the fluorescence, but the effect is more dramatic with substitution of one (22) or two (23) amines.[35]",
+                "bbox": [
+                  43,
+                  459,
+                  291,
+                  589
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/4",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              43,
+              459,
+              291,
+              589
+            ],
+            "raw_text_excerpt": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 4,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "middle",
+        "math_mode": "direct_typst",
+        "protected_source_text": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions on the 3- and 5-positions (Figure 5), indicating EDGs would result in a red-shift in fluorescence. Two EDGs in the 3- and 5-positions in 19 red-shifts the fluorescence from unsubstituted BODIPY 18.[34] This effect is more significant when electron donating ability is increased. Switching chlorides of 20 to methoxy groups (21) only slightly red-shifts the fluorescence, but the effect is more dramatic with substitution of one (22) or two (23) amines.[35]",
+        "mixed_original_protected_source_text": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions on the 3- and 5-positions (Figure 5), indicating EDGs would result in a red-shift in fluorescence. Two EDGs in the 3- and 5-positions in 19 red-shifts the fluorescence from unsubstituted BODIPY 18.[34] This effect is more significant when electron donating ability is increased. Switching chlorides of 20 to methoxy groups (21) only slightly red-shifts the fluorescence, but the effect is more dramatic with substitution of one (22) or two (23) amines.[35]",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "p006-b004",
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [
+          "p006-b004"
+        ],
+        "translation_unit_protected_source_text": "BODIPY. Tuning BODIPY fluorescence has not been well understood in the past,[33] however, the fluorescence follows expected trends when using an FMO analysis. There are more HOMO orbital contributions on the 3- and 5-positions (Figure 5), indicating EDGs would result in a red-shift in fluorescence. Two EDGs in the 3- and 5-positions in 19 red-shifts the fluorescence from unsubstituted BODIPY 18.[34] This effect is more significant when electron donating ability is increased. Switching chlorides of 20 to methoxy groups (21) only slightly red-shifts the fluorescence, but the effect is more dramatic with substitution of one (22) or two (23) amines.[35]",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "BODIPY. Past tuning of BODIPY fluorescence was not well understood,[33] however, using FMO analysis, its fluorescence follows expected trends. Greater HOMO orbital contributions at positions 3 and 5 (Figure 5) indicate that electron-donating groups (EDGs) cause fluorescence redshift. Introducing two electron-donating groups at positions 3 and 5 of compound 19 redshifts its fluorescence relative to unsubstituted BODIPY 18.[34] This effect becomes more pronounced as electron-donating ability increases. Replacing the chlorine atom in compound 20 with methoxy (21) only slightly redshifts fluorescence, but replacing with one (22) or two (23) amino groups produces a more significant effect.[35]",
+        "translation_unit_translated_text": "BODIPY. Past tuning of BODIPY fluorescence was not well understood,[33] however, using FMO analysis, its fluorescence follows expected trends. Greater HOMO orbital contributions at positions 3 and 5 (Figure 5) indicate that electron-donating groups (EDGs) cause fluorescence redshift. Introducing two electron-donating groups at positions 3 and 5 of compound 19 redshifts its fluorescence relative to unsubstituted BODIPY 18.[34] This effect becomes more pronounced as electron-donating ability increases. Replacing the chlorine atom in compound 20 with methoxy (21) only slightly redshifts fluorescence, but replacing with one (22) or two (23) amino groups produces a more significant effect.[35]",
+        "protected_translated_text": "BODIPY. Past tuning of BODIPY fluorescence was not well understood,[33] however, using FMO analysis, its fluorescence follows expected trends. Greater HOMO orbital contributions at positions 3 and 5 (Figure 5) indicate that electron-donating groups (EDGs) cause fluorescence redshift. Introducing two electron-donating groups at positions 3 and 5 of compound 19 redshifts its fluorescence relative to unsubstituted BODIPY 18.[34] This effect becomes more pronounced as electron-donating ability increases. Replacing the chlorine atom in compound 20 with methoxy (21) only slightly redshifts fluorescence, but replacing with one (22) or two (23) amino groups produces a more significant effect.[35]",
+        "translated_text": "BODIPY. Past tuning of BODIPY fluorescence was not well understood,[33] however, using FMO analysis, its fluorescence follows expected trends. Greater HOMO orbital contributions at positions 3 and 5 (Figure 5) indicate that electron-donating groups (EDGs) cause fluorescence redshift. Introducing two electron-donating groups at positions 3 and 5 of compound 19 redshifts its fluorescence relative to unsubstituted BODIPY 18.[34] This effect becomes more pronounced as electron-donating ability increases. Replacing the chlorine atom in compound 20 with methoxy (21) only slightly redshifts fluorescence, but replacing with one (22) or two (23) amino groups produces a more significant effect.[35]",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "",
+        "group_translated_text": "",
+        "final_status": "translated",
+        "translation_diagnostics": {
+          "item_id": "p006-b004",
+          "page_idx": 5,
+          "route_path": [
+            "block_level",
+            "direct_typst"
+          ],
+          "output_mode_path": [
+            "plain_text"
+          ],
+          "fallback_to": "",
+          "degradation_reason": "",
+          "final_status": "translated"
+        },
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b005",
+        "page_idx": 5,
+        "block_idx": 5,
+        "block_type": "text",
+        "bbox": [
+          43,
+          591,
+          291,
+          745
+        ],
+        "source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have",
+        "lines": [
+          {
+            "bbox": [
+              43,
+              591,
+              291,
+              745
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a",
+                "bbox": [
+                  43,
+                  591,
+                  291,
+                  745
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "42\\mathrm{nm}",
+                "bbox": [
+                  43,
+                  591,
+                  291,
+                  745
+                ]
+              },
+              {
+                "type": "text",
+                "content": "bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have",
+                "bbox": [
+                  43,
+                  591,
+                  291,
+                  745
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/5",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              43,
+              591,
+              291,
+              745
+            ],
+            "raw_text_excerpt": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] Th"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "left_column",
+        "layout_zone_rank": 5,
+        "layout_zone_size": 6,
+        "layout_boundary_role": "tail",
+        "math_mode": "direct_typst",
+        "protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have",
+        "mixed_original_protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "__cg__:cg-006-006",
+        "translation_unit_kind": "group",
+        "translation_unit_member_ids": [
+          "p006-b005",
+          "p006-b006"
+        ],
+        "translation_unit_protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "translation_unit_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "protected_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO",
+        "translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO",
+        "continuation_group": "cg-006-006",
+        "continuation_prev_text": "",
+        "continuation_next_text": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "continuation_decision": "joined",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "group_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "final_status": "translated",
+        "translation_diagnostics": {},
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b006",
+        "page_idx": 5,
+        "block_idx": 6,
+        "block_type": "text",
+        "bbox": [
+          300,
+          63,
+          549,
+          146
+        ],
+        "source_text": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "lines": [
+          {
+            "bbox": [
+              300,
+              63,
+              549,
+              146
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the",
+                "bbox": [
+                  300,
+                  63,
+                  549,
+                  146
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "\\pi",
+                "bbox": [
+                  300,
+                  63,
+                  549,
+                  146
+                ]
+              },
+              {
+                "type": "text",
+                "content": "-system and therefore is in conjugation. The resultant",
+                "bbox": [
+                  300,
+                  63,
+                  549,
+                  146
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "\\pi",
+                "bbox": [
+                  300,
+                  63,
+                  549,
+                  146
+                ]
+              },
+              {
+                "type": "text",
+                "content": "-system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+                "bbox": [
+                  300,
+                  63,
+                  549,
+                  146
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/6",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              300,
+              63,
+              549,
+              146
+            ],
+            "raw_text_excerpt": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the ni"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "right_column",
+        "layout_zone_rank": 0,
+        "layout_zone_size": 3,
+        "layout_boundary_role": "head",
+        "math_mode": "direct_typst",
+        "protected_source_text": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "mixed_original_protected_source_text": "withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "__cg__:cg-006-006",
+        "translation_unit_kind": "group",
+        "translation_unit_member_ids": [
+          "p006-b005",
+          "p006-b006"
+        ],
+        "translation_unit_protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "translation_unit_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "protected_translated_text": "density, introducing electron-withdrawing groups, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "translated_text": "density, introducing electron-withdrawing groups, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "continuation_group": "cg-006-006",
+        "continuation_prev_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have",
+        "continuation_next_text": "",
+        "continuation_decision": "joined",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "BODIPY has HOMO density on the 2- and 6-positions and no significant LUMO contributions. Substituting an ethyl group on the 6-position as shown in 25 red-shifts the fluorescence compared to 24.[37] The fluorescence is further shifted when substituting both the 2- and 6-positions with methyl (26) or ethyl groups (27). Substitution with bromide (28) shows a 42\\mathrm{nm} bathochromic shift in fluorescence relative to 34.[36] Furthermore, fusing cyclic structures on the 2- and 6-positions shifts the fluorescence further (29) due to better hyperconjugation.[38,39] However, if the cyclic structure is fused to positions with LUMO density, such as 30, the same red-shifting as 29 is not observed.[38] There are a few structures that appear to stray from the expected trends. 31 and 32 have withdrawing groups on positions with mainly HOMO density, yet the fluorescence is red-shifted versus the unfunctionalized version 34.[36] However, when considering the geometry of the molecule, the nitro group of 31 is parallel with the \\pi -system and therefore is in conjugation. The resultant \\pi -system extension results in the observed red-shift (see extending conjugation section). This is also true for sulfonate 32.[36]",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "group_translated_text": "BODIPY HOMO density is at positions 2 and 6, while LUMO contribution is not significant. As shown with compound 25, introducing an ethyl substituent at position 6 causes a redshift in fluorescence compared to 24[37]. When positions 2 and 6 are simultaneously substituted with methoxy (26) or ethyl (27), fluorescence further redshifts. Bromide (28) shows a 42 nm fluorescence redshift relative to 34[36]. Additionally, due to better hyperconjugation effects, fusing a cyclic structure at positions 2 and 6 (29) further redshifts fluorescence[38,39]. However, if the cyclic structure is fused at a site with LUMO density (such as 30), the same redshift as 29 is not observed[38]. A few structures appear to deviate from expected trends. 31 and 32 introduced electron-withdrawing groups at sites primarily with HOMO density, but their fluorescence redshifted relative to the unfunctionalized version 34[36]. However, considering the molecular geometry, the nitro group of 31 is coplanar with the $\\pi$ system, placing it in conjugation. The resulting $\\pi$ system extension leads to the observed redshift (see conjugation extension section). The same applies to sulfonate 32[36].",
+        "final_status": "translated",
+        "translation_diagnostics": {},
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b007",
+        "page_idx": 5,
+        "block_idx": 7,
+        "block_type": "text",
+        "bbox": [
+          301,
+          147,
+          549,
+          326
+        ],
+        "source_text": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted (hypsochromic shift). This is illustrated with 19 versus 33 and 34.[36,37] 33 is more highly functionalized than 19, but there is a weak EDG in the meso-position, which destabilizes the LUMO resulting in a slight blue-shift relative to 19. 34 is even more functionalized than 19, but the emission is the same. This reinforces the importance of considering orbital contribution on each position. The meso-position shows exclusively LUMO contribution. Therefore, adding EWG to the mesoposition, as in 35, red-shifts the fluorescence by over 60\\mathrm{nm} compared to 27.[38] In summary, red-shifting the BODIPY scaffold is achieved by putting strong EDGs on the 2-, 3-, 5-, and 6-positions and strong EWGs on the meso-position.",
+        "lines": [
+          {
+            "bbox": [
+              301,
+              147,
+              549,
+              326
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted (hypsochromic shift). This is illustrated with 19 versus 33 and 34.[36,37] 33 is more highly functionalized than 19, but there is a weak EDG in the meso-position, which destabilizes the LUMO resulting in a slight blue-shift relative to 19. 34 is even more functionalized than 19, but the emission is the same. This reinforces the importance of considering orbital contribution on each position. The meso-position shows exclusively LUMO contribution. Therefore, adding EWG to the mesoposition, as in 35, red-shifts the fluorescence by over",
+                "bbox": [
+                  301,
+                  147,
+                  549,
+                  326
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "60\\mathrm{nm}",
+                "bbox": [
+                  301,
+                  147,
+                  549,
+                  326
+                ]
+              },
+              {
+                "type": "text",
+                "content": "compared to 27.[38] In summary, red-shifting the BODIPY scaffold is achieved by putting strong EDGs on the 2-, 3-, 5-, and 6-positions and strong EWGs on the meso-position.",
+                "bbox": [
+                  301,
+                  147,
+                  549,
+                  326
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/7",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              301,
+              147,
+              549,
+              326
+            ],
+            "raw_text_excerpt": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "right_column",
+        "layout_zone_rank": 1,
+        "layout_zone_size": 3,
+        "layout_boundary_role": "middle",
+        "math_mode": "direct_typst",
+        "protected_source_text": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted (hypsochromic shift). This is illustrated with 19 versus 33 and 34.[36,37] 33 is more highly functionalized than 19, but there is a weak EDG in the meso-position, which destabilizes the LUMO resulting in a slight blue-shift relative to 19. 34 is even more functionalized than 19, but the emission is the same. This reinforces the importance of considering orbital contribution on each position. The meso-position shows exclusively LUMO contribution. Therefore, adding EWG to the mesoposition, as in 35, red-shifts the fluorescence by over 60\\mathrm{nm} compared to 27.[38] In summary, red-shifting the BODIPY scaffold is achieved by putting strong EDGs on the 2-, 3-, 5-, and 6-positions and strong EWGs on the meso-position.",
+        "mixed_original_protected_source_text": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted (hypsochromic shift). This is illustrated with 19 versus 33 and 34.[36,37] 33 is more highly functionalized than 19, but there is a weak EDG in the meso-position, which destabilizes the LUMO resulting in a slight blue-shift relative to 19. 34 is even more functionalized than 19, but the emission is the same. This reinforces the importance of considering orbital contribution on each position. The meso-position shows exclusively LUMO contribution. Therefore, adding EWG to the mesoposition, as in 35, red-shifts the fluorescence by over 60\\mathrm{nm} compared to 27.[38] In summary, red-shifting the BODIPY scaffold is achieved by putting strong EDGs on the 2-, 3-, 5-, and 6-positions and strong EWGs on the meso-position.",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "p006-b007",
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [
+          "p006-b007"
+        ],
+        "translation_unit_protected_source_text": "Burgess stated the more the BODIPY core is functionalized, the further red it will emit.[33] However, if EDG are added to positions where the LUMO mainly resides, then the fluorescence is blue-shifted (hypsochromic shift). This is illustrated with 19 versus 33 and 34.[36,37] 33 is more highly functionalized than 19, but there is a weak EDG in the meso-position, which destabilizes the LUMO resulting in a slight blue-shift relative to 19. 34 is even more functionalized than 19, but the emission is the same. This reinforces the importance of considering orbital contribution on each position. The meso-position shows exclusively LUMO contribution. Therefore, adding EWG to the mesoposition, as in 35, red-shifts the fluorescence by over 60\\mathrm{nm} compared to 27.[38] In summary, red-shifting the BODIPY scaffold is achieved by putting strong EDGs on the 2-, 3-, 5-, and 6-positions and strong EWGs on the meso-position.",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "Burgess noted that the more functionalized the BODIPY core, the more redshifted its emission wavelength.[33] However, introducing electron-donating groups (EDG) at sites with predominant LUMO density causes a blueshift (shift toward shorter wavelengths). This is illustrated by comparing compounds 19 with 33 and 34[36,37]. 33 is more functionalized than 19, but its meso position has a weak electron-donating group that destabilizes the LUMO, causing a slight blueshift relative to 19. 34 is even more functionalized than 19, but its emission wavelength is the same as 19. This further emphasizes the importance of considering orbital contributions at each position. The meso position shows pure LUMO contribution. Therefore, introducing an electron-withdrawing group (EWG) at the meso position, as in compound 35, redshifts fluorescence by over $60\\,\\mathrm{nm}$ compared to 27[38]. In summary, redshifting the BODIPY scaffold is achieved by introducing strong electron-donating groups at positions 2, 3, 5 and 6, and strong electron-withdrawing groups at the meso position.",
+        "translation_unit_translated_text": "Burgess noted that the more functionalized the BODIPY core, the more redshifted its emission wavelength.[33] However, introducing electron-donating groups (EDG) at sites with predominant LUMO density causes a blueshift (shift toward shorter wavelengths). This is illustrated by comparing compounds 19 with 33 and 34[36,37]. 33 is more functionalized than 19, but its meso position has a weak electron-donating group that destabilizes the LUMO, causing a slight blueshift relative to 19. 34 is even more functionalized than 19, but its emission wavelength is the same as 19. This further emphasizes the importance of considering orbital contributions at each position. The meso position shows pure LUMO contribution. Therefore, introducing an electron-withdrawing group (EWG) at the meso position, as in compound 35, redshifts fluorescence by over $60\\,\\mathrm{nm}$ compared to 27[38]. In summary, redshifting the BODIPY scaffold is achieved by introducing strong electron-donating groups at positions 2, 3, 5 and 6, and strong electron-withdrawing groups at the meso position.",
+        "protected_translated_text": "Burgess noted that the more functionalized the BODIPY core, the more redshifted its emission wavelength.[33] However, introducing electron-donating groups (EDG) at sites with predominant LUMO density causes a blueshift (shift toward shorter wavelengths). This is illustrated by comparing compounds 19 with 33 and 34[36,37]. 33 is more functionalized than 19, but its meso position has a weak electron-donating group that destabilizes the LUMO, causing a slight blueshift relative to 19. 34 is even more functionalized than 19, but its emission wavelength is the same as 19. This further emphasizes the importance of considering orbital contributions at each position. The meso position shows pure LUMO contribution. Therefore, introducing an electron-withdrawing group (EWG) at the meso position, as in compound 35, redshifts fluorescence by over $60\\,\\mathrm{nm}$ compared to 27[38]. In summary, redshifting the BODIPY scaffold is achieved by introducing strong electron-donating groups at positions 2, 3, 5 and 6, and strong electron-withdrawing groups at the meso position.",
+        "translated_text": "Burgess noted that the more functionalized the BODIPY core, the more redshifted its emission wavelength.[33] However, introducing electron-donating groups (EDG) at sites with predominant LUMO density causes a blueshift (shift toward shorter wavelengths). This is illustrated by comparing compounds 19 with 33 and 34[36,37]. 33 is more functionalized than 19, but its meso position has a weak electron-donating group that destabilizes the LUMO, causing a slight blueshift relative to 19. 34 is even more functionalized than 19, but its emission wavelength is the same as 19. This further emphasizes the importance of considering orbital contributions at each position. The meso position shows pure LUMO contribution. Therefore, introducing an electron-withdrawing group (EWG) at the meso position, as in compound 35, redshifts fluorescence by over $60\\,\\mathrm{nm}$ compared to 27[38]. In summary, redshifting the BODIPY scaffold is achieved by introducing strong electron-donating groups at positions 2, 3, 5 and 6, and strong electron-withdrawing groups at the meso position.",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "",
+        "group_translated_text": "",
+        "final_status": "translated",
+        "translation_diagnostics": {
+          "item_id": "p006-b007",
+          "page_idx": 5,
+          "route_path": [
+            "block_level",
+            "direct_typst"
+          ],
+          "output_mode_path": [
+            "plain_text"
+          ],
+          "fallback_to": "",
+          "degradation_reason": "",
+          "final_status": "translated"
+        },
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      },
+      {
+        "item_id": "p006-b008",
+        "page_idx": 5,
+        "block_idx": 8,
+        "block_type": "text",
+        "bbox": [
+          301,
+          327,
+          549,
+          747
+        ],
+        "source_text": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16\\mathrm{nm} blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings",
+        "lines": [
+          {
+            "bbox": [
+              301,
+              327,
+              549,
+              747
+            ],
+            "spans": [
+              {
+                "type": "text",
+                "content": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a",
+                "bbox": [
+                  301,
+                  327,
+                  549,
+                  747
+                ]
+              },
+              {
+                "type": "inline_equation",
+                "content": "16\\mathrm{nm}",
+                "bbox": [
+                  301,
+                  327,
+                  549,
+                  747
+                ]
+              },
+              {
+                "type": "text",
+                "content": "blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings",
+                "bbox": [
+                  301,
+                  327,
+                  549,
+                  747
+                ]
+              }
+            ]
+          }
+        ],
+        "metadata": {
+          "ocr_sub_type": "body",
+          "normalized_sub_type": "body",
+          "structure_role": "body",
+          "raw_type": "text",
+          "tags": [],
+          "derived": {
+            "role": "",
+            "by": "",
+            "confidence": 0.0
+          },
+          "continuation_hint": {
+            "source": "",
+            "group_id": "",
+            "role": "",
+            "scope": "",
+            "reading_order": -1,
+            "confidence": 0.0
+          },
+          "source": {
+            "provider": "mineru",
+            "raw_page_index": 5,
+            "raw_path": "/pdf_info/5/para_blocks/8",
+            "raw_type": "text",
+            "raw_sub_type": "",
+            "raw_bbox": [
+              301,
+              327,
+              549,
+              747
+            ],
+            "raw_text_excerpt": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of car"
+          },
+          "structure_group": "",
+          "pair_with": ""
+        },
+        "ocr_continuation_source": "",
+        "ocr_continuation_group_id": "",
+        "ocr_continuation_role": "",
+        "ocr_continuation_scope": "",
+        "ocr_continuation_reading_order": -1,
+        "ocr_continuation_confidence": 0.0,
+        "layout_mode": "double",
+        "layout_split_x": 295.75,
+        "layout_zone": "right_column",
+        "layout_zone_rank": 2,
+        "layout_zone_size": 3,
+        "layout_boundary_role": "tail",
+        "math_mode": "direct_typst",
+        "protected_source_text": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16\\mathrm{nm} blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings",
+        "mixed_original_protected_source_text": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16\\mathrm{nm} blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings",
+        "formula_map": [],
+        "protected_map": [],
+        "classification_label": "",
+        "should_translate": true,
+        "skip_reason": "",
+        "mixed_literal_action": "",
+        "mixed_literal_prefix": "",
+        "translation_unit_id": "__cg__:cg-006-007",
+        "translation_unit_kind": "group",
+        "translation_unit_member_ids": [
+          "p006-b008",
+          "p007-b000"
+        ],
+        "translation_unit_protected_source_text": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16\\mathrm{nm} blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "translation_unit_formula_map": [],
+        "translation_unit_protected_map": [],
+        "translation_unit_protected_translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "translation_unit_translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "protected_translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). Th",
+        "translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). Th",
+        "continuation_group": "cg-006-007",
+        "continuation_prev_text": "",
+        "continuation_next_text": "highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "continuation_decision": "joined",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "group_protected_source_text": "Cyanine. Cyanines are composed of polycyclic aromatic moieties, typically indoles, linked by a polymethine bridge. They are commonly named as 'Cy' followed by a number that indicates the number of carbon atoms in the bridge, such as Cy3 and Cy5. Cyanines have alternating HOMO and LUMO density on the polymethine bridge. The LUMO density is on the even number positions and the HOMO is on the odd positions (Cy7 shown in Figure 6). Addition of electron donors such as fluorine (36 to 37) and methoxy (39) to an odd position destabilizes the HOMO, resulting in a fluorescence red-shift.[40] Unlike when iodine and bromine are added to phenyl rings, when they are added to polymethines (38) they act as electron withdrawing moieties (inductive effect wins). This distinction arises from the difference in the electronic structure and conjugation of these two systems. Phenyl rings are aromatic, meaning they possess a high degree of conjugation and electron delocalization, whereas polymethines are cross-conjugated, leading to less efficient electron delocalization. The type of conjugation is important to pay attention to when designing fluorophores or interpreting fluorescent properties. Electron withdrawing moieties elicit a blue shift relative to Cy7 (40).[40] EWG on the even positions stabilizes the LUMO and red-shifts the fluorescence (41). The stronger the withdrawing moiety, the further red the emission. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16\\mathrm{nm} blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, this decrease in FMOs results in a slightly larger HOMO-LUMO gap, whereas the energy gap for benzothiazole remains constant (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "group_formula_map": [],
+        "group_protected_map": [],
+        "group_protected_translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "group_translated_text": "Cyanine dyes. Cyanine dyes consist of polycyclic aromatic groups (typically indoles) connected by polymethine bridges. Their names are typically "Cy" followed by a number indicating the number of carbon atoms in the bridge, e.g., Cy3 and Cy5. The polymethine bridge of cyanine dyes has alternating HOMO and LUMO electron densities: LUMO density at even positions, HOMO density at odd positions (Figure 6 shows the structure of Cy7). Adding electron donors at odd positions, such as fluorine (36 to 37) and methoxy (39), destabilizes the HOMO, leading to fluorescence redshift.[40] Unlike when iodine and bromine are added to the benzene ring, when they are added to the polymethine chain (38), they act as electron-withdrawing groups (inductive effect dominates). This difference arises from the different electronic structures and conjugation properties of the two systems: the benzene ring is aromatic with high conjugation and electron delocalization, while the polymethine chain is cross-conjugated, leading to less efficient electron delocalization. When designing fluorophores or interpreting fluorescence properties, attention must be paid to conjugation type. Relative to Cy7, electron-withdrawing groups cause a blueshift (40).[40] Introducing electron-withdrawing groups (EWG) at even positions stabilizes the LUMO and redshifts fluorescence (41).The stronger the electron-withdrawing group, the more significant the emission redshift. Fluorination of cyanine phenyl rings should show no change in emission, which is the case for the fluorinated thiadicarbocyanine synthesized by Armitage and coworkers.[45] However, perfluorinated Cy3 prepared by Funabiki and coworkers[46] shows a 16 nm blue-shift relative to the parent Cy3. This initially unexpected difference arises because the entire indole moiety must be considered as the R-group. Fluorination of both indole and benzothiazole leads to a slight decrease in their HOMO and LUMO levels. Nonetheless, for indole, the decrease in frontier molecular orbital (FMO) levels leads to a slight increase in the HOMO-LUMO energy gap, while the energy gap of benzothiazole remains unchanged (Figure S1). These findings highlight the importance of exercising caution and treating the aromatic heterocycle as an R-group when utilizing FMOs to assess and predict cyanine fluorescence.",
+        "final_status": "translated",
+        "translation_diagnostics": {},
+        "candidate_pair_prev_id": "",
+        "candidate_pair_next_id": ""
+      }
+    ]
+  },
+  "replay": {
+    "job_root": "20260416034152-d12925",
+    "job_id": "20260416034152-d12925",
+    "item_id": "p006-b001",
+    "page_idx": 5,
+    "page_path": "translated/page-006-deepseek.json",
+    "source_preview": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems fu…",
+    "saved_item": {
+      "item_id": "p006-b001",
+      "page_idx": 5,
+      "block_idx": 1,
+      "block_type": "text",
+      "bbox": [
+        42,
+        88,
+        291,
+        194
+      ],
+      "source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "lines": [
+        {
+          "bbox": [
+            42,
+            88,
+            291,
+            194
+          ],
+          "spans": [
+            {
+              "type": "text",
+              "content": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "inline_equation",
+              "content": "551\\mathrm{nm}",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "text",
+              "content": ". Fused systems further shift the fluorescence to",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "inline_equation",
+              "content": "575\\mathrm{nm}",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            },
+            {
+              "type": "text",
+              "content": "(10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+              "bbox": [
+                42,
+                88,
+                291,
+                194
+              ]
+            }
+          ]
+        }
+      ],
+      "metadata": {
+        "ocr_sub_type": "body",
+        "normalized_sub_type": "body",
+        "structure_role": "body",
+        "raw_type": "text",
+        "tags": [],
+        "derived": {
+          "role": "",
+          "by": "",
+          "confidence": 0.0
+        },
+        "continuation_hint": {
+          "source": "",
+          "group_id": "",
+          "role": "",
+          "scope": "",
+          "reading_order": -1,
+          "confidence": 0.0
+        },
+        "source": {
+          "provider": "mineru",
+          "raw_page_index": 5,
+          "raw_path": "/pdf_info/5/para_blocks/1",
+          "raw_type": "text",
+          "raw_sub_type": "",
+          "raw_bbox": [
+            42,
+            88,
+            291,
+            194
+          ],
+          "raw_text_excerpt": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm}"
+        },
+        "structure_group": "",
+        "pair_with": ""
+      },
+      "ocr_continuation_source": "",
+      "ocr_continuation_group_id": "",
+      "ocr_continuation_role": "",
+      "ocr_continuation_scope": "",
+      "ocr_continuation_reading_order": -1,
+      "ocr_continuation_confidence": 0.0,
+      "layout_mode": "double",
+      "layout_split_x": 295.75,
+      "layout_zone": "left_column",
+      "layout_zone_rank": 1,
+      "layout_zone_size": 6,
+      "layout_boundary_role": "middle",
+      "math_mode": "direct_typst",
+      "protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "mixed_original_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "formula_map": [],
+      "protected_map": [],
+      "classification_label": "skip_model_keep_origin",
+      "should_translate": false,
+      "skip_reason": "skip_model_keep_origin",
+      "mixed_literal_action": "",
+      "mixed_literal_prefix": "",
+      "translation_unit_id": "p006-b001",
+      "translation_unit_kind": "single",
+      "translation_unit_member_ids": [
+        "p006-b001"
+      ],
+      "translation_unit_protected_source_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a red-shift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551\\mathrm{nm} . Fused systems further shift the fluorescence to 575\\mathrm{nm} (10).[24] Albeit, the red shift in emission comes at a cost, where the quantum yields of 9 and 10 are almost zero. In summary, red-shifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "translation_unit_formula_map": [],
+      "translation_unit_protected_map": [],
+      "translation_unit_protected_translated_text": "",
+      "translation_unit_translated_text": "",
+      "protected_translated_text": "",
+      "translated_text": "",
+      "continuation_group": "",
+      "continuation_prev_text": "",
+      "continuation_next_text": "",
+      "continuation_decision": "",
+      "continuation_candidate_prev_id": "",
+      "continuation_candidate_next_id": "",
+      "group_protected_source_text": "",
+      "group_formula_map": [],
+      "group_protected_map": [],
+      "group_protected_translated_text": "",
+      "group_translated_text": "",
+      "final_status": "kept_origin",
+      "translation_diagnostics": {
+        "item_id": "p006-b001",
+        "page_idx": 5,
+        "route_path": [
+          "block_level",
+          "direct_typst",
+          "keep_origin"
+        ],
+        "error_trace": [
+          {
+            "type": "transport",
+            "code": "TRANSPORT_ERROR"
+          }
+        ],
+        "fallback_to": "keep_origin",
+        "degradation_reason": "transport_timeout_budget_exceeded",
+        "final_status": "kept_origin"
+      },
+      "candidate_pair_prev_id": "",
+      "candidate_pair_next_id": ""
+    },
+    "policy_before": {
+      "item_id": "p006-b001",
+      "page_idx": 5,
+      "block_idx": 1,
+      "classification_label": "skip_model_keep_origin",
+      "should_translate": false,
+      "skip_reason": "skip_model_keep_origin",
+      "mixed_literal_action": "",
+      "mixed_literal_prefix": "",
+      "final_status": "kept_origin",
+      "route_path": [
+        "block_level",
+        "direct_typst",
+        "keep_origin"
+      ],
+      "fallback_to": "keep_origin",
+      "degradation_reason": "transport_timeout_budget_exceeded"
+    },
+    "policy_after": {
+      "item_id": "p006-b001",
+      "page_idx": 5,
+      "block_idx": 1,
+      "classification_label": "",
+      "should_translate": true,
+      "skip_reason": "",
+      "mixed_literal_action": "",
+      "mixed_literal_prefix": "",
+      "final_status": "kept_origin",
+      "route_path": [
+        "block_level",
+        "direct_typst",
+        "keep_origin"
+      ],
+      "fallback_to": "keep_origin",
+      "degradation_reason": "transport_timeout_budget_exceeded"
+    },
+    "replay_result": {
+      "decision": "translate",
+      "translated_text": "In amino coumarins, enhancing the nitrogen donation ability also leads to a redshift in fluorescence. Formation of heterocycle 9 improves hyperconjugation, shifting the fluorescence to 551 nm. Fused systems further shift the fluorescence to 575 nm (10).[24] However, the redshift in emission comes at a cost, where the quantum yields of compounds 9 and 10 are almost zero. In summary, redshifting the coumarin scaffold is achieved by putting EDGs on the 6- and 7-positions, and EWGs on the 4-position.",
+      "final_status": "translated"
+    },
+    "replay_error": null
+  },
+  "drift": {
+    "saved_final_status": "kept_origin",
+    "replay_policy_final_status": "kept_origin",
+    "replay_result_final_status": "translated",
+    "saved_should_translate": false,
+    "replay_should_translate": true,
+    "saved_skip_reason": "skip_model_keep_origin",
+    "replay_skip_reason": "",
+    "saved_classification_label": "skip_model_keep_origin",
+    "replay_classification_label": "",
+    "saved_has_translation": false,
+    "replay_has_translation": true,
+    "replay_error_type": "",
+    "policy_changed": true,
+    "drifted": true,
+    "reason_tags": [
+      "policy_changed",
+      "should_translate_changed",
+      "classification_changed",
+      "skip_reason_changed",
+      "final_status_changed",
+      "translation_presence_changed"
+    ]
+  }
+}

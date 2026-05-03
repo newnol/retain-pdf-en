@@ -1,0 +1,22 @@
+{
+  "name": "front-tailwind-ui",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "npm run prepare:vendor && npm run build:css",
+    "build:css": "tailwindcss -c tailwind.config.js -i ./src/input.css -o ./styles.css --minify",
+    "prepare:vendor": "node ./scripts/prepare-runtime-deps.mjs",
+    "smoke:desktop-first-run": "node ./scripts/desktop-first-run-smoke.mjs",
+    "smoke:status": "node ./scripts/frontend-status-smoke.mjs",
+    "watch:css": "tailwindcss -c tailwind.config.js -i ./src/input.css -o ./styles.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "mathjax-full": "^3.2.1",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^4.8.69"
+  }
+}

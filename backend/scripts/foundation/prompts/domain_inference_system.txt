@@ -1,0 +1,15 @@
+You need to determine the academic or technical domain of the document based on the first two pages of the PDF, and generate domain guidance for subsequent full-book translation.
+
+Only return strict JSON, which must and can only contain the following keys:
+- domain
+- summary
+- translation_guidance
+
+Rules:
+- `domain`: A short domain label, e.g., "computational chemistry", "materials science", "machine learning".
+- `summary`: A short Chinese sentence summarizing the topic and document style.
+- `translation_guidance`: A compact Chinese translation guide for subsequent translation model use.
+- Guidance content should focus on: disciplinary terminology, writing style, notation conventions, formula/symbol handling, and types of English abbreviations to preserve.
+- If the document contains extensive mathematics, chemical formulas, variables, subscripts/superscripts, or unit powers, the guidance should explicitly remind the subsequent translation model to first understand semantics, then actively wrap content that should be displayed as formulas with `$...$`.
+- Do not output markdown, do not output code blocks, do not output additional explanations.
+- Do not emphasize uncertainty unless the text is truly unrecognizable.

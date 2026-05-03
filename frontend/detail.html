@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Job Details</title>
+    <link rel="icon" type="image/svg+xml" href="./src/assets/RetainPDF-logo.svg" />
+    <link rel="shortcut icon" href="./src/assets/RetainPDF-logo.svg" />
+    <link rel="stylesheet" href="./styles.css" />
+    
+    <script src="./runtime-config.js"></script>
+    <script src="./runtime-config.local.js"></script>
+  </head>
+  <body class="detail-body">
+    <main class="detail-page">
+      <section class="detail-hero">
+        <div class="detail-hero-top">
+          <div>
+            <h1>Job Details</h1>
+            <p id="detail-head-note">Share the current job details directly via `detail.html?job_id=...`.</p>
+          </div>
+          <div class="detail-actions">
+            <a id="detail-reader-btn" class="button-link secondary disabled" href="#" target="_blank" rel="noopener noreferrer">Bilingual Reader</a>
+            <a id="detail-pdf-btn" class="button-link secondary disabled" href="#" target="_blank" rel="noopener noreferrer">Download PDF</a>
+            <a id="detail-markdown-raw-btn" class="button-link secondary disabled" href="#" target="_blank" rel="noopener noreferrer">Markdown</a>
+            <a id="detail-markdown-json-btn" class="button-link secondary disabled" href="#" target="_blank" rel="noopener noreferrer">Markdown JSON</a>
+          </div>
+        </div>
+        <div class="detail-meta-list">
+          <div class="detail-meta-row"><span class="label">Job ID</span><span id="detail-job-id" class="value mono">-</span></div>
+          <div class="detail-meta-row"><span class="label">Status Summary</span><span id="detail-status-summary" class="value">-</span></div>
+          <div class="detail-meta-row"><span class="label">Current Stage</span><span id="detail-stage-detail" class="value">-</span></div>
+          <div class="detail-meta-row"><span class="label">Finished At</span><span id="detail-finished-at" class="value">-</span></div>
+        </div>
+      </section>
+
+      <section class="detail-grid">
+        <article class="detail-card">
+          <h2>Runtime Info</h2>
+          <div class="detail-meta-list">
+            <div class="detail-meta-row"><span class="label">Current Stage</span><span id="detail-runtime-current-stage" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Stage Elapsed</span><span id="detail-runtime-stage-elapsed" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Total Elapsed</span><span id="detail-runtime-total-elapsed" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Retry Count</span><span id="detail-runtime-retry-count" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Last Transition</span><span id="detail-runtime-last-transition" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Terminal Reason</span><span id="detail-runtime-terminal-reason" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Input Protocol</span><span id="detail-runtime-input-protocol" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Stage Schema</span><span id="detail-runtime-stage-spec-version" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Math Mode</span><span id="detail-runtime-math-mode" class="value">-</span></div>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <h2>Failure Diagnosis</h2>
+          <div class="detail-meta-list">
+            <div class="detail-meta-row"><span class="label">Summary</span><span id="detail-failure-summary" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Category</span><span id="detail-failure-category" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Stage</span><span id="detail-failure-stage" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Root Cause</span><span id="detail-failure-root-cause" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Suggestion</span><span id="detail-failure-suggestion" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Last Log</span><span id="detail-failure-last-log-line" class="value">-</span></div>
+            <div class="detail-meta-row"><span class="label">Retryable</span><span id="detail-failure-retryable" class="value">-</span></div>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <h2>Hints / Errors</h2>
+          <pre id="detail-error-box" class="detail-log">-</pre>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-trigger-head">
+            <h2>Artifacts Manifest</h2>
+            <span id="detail-artifacts-summary" class="detail-inline-note">Not yet loaded</span>
+          </div>
+          <div id="detail-artifacts-list" class="detail-artifact-list">
+            <div class="detail-empty">No artifacts manifest available</div>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-trigger-head">
+            <h2>Markdown Preview</h2>
+            <span id="detail-markdown-status" class="detail-inline-note">Not requested</span>
+          </div>
+          <div class="detail-meta-list">
+            <div class="detail-meta-row"><span class="label">JSON Endpoint</span><span id="detail-markdown-json-url" class="value mono">-</span></div>
+            <div class="detail-meta-row"><span class="label">Raw Endpoint</span><span id="detail-markdown-raw-url" class="value mono">-</span></div>
+            <div class="detail-meta-row"><span class="label">Images Base URL</span><span id="detail-markdown-images-base-url" class="value mono">-</span></div>
+            <div class="detail-meta-row"><span class="label">Image Ref Count</span><span id="detail-markdown-image-count" class="value">-</span></div>
+          </div>
+          <div id="detail-markdown-image-grid" class="detail-markdown-image-grid hidden"></div>
+          <div id="detail-markdown-image-empty" class="detail-empty">No Markdown image references</div>
+          <pre id="detail-markdown-preview" class="detail-log">-</pre>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-modal-trigger">
+            <div class="detail-trigger-head">
+              <h2>Stage Timeline</h2>
+              <button id="detail-open-stage-history-btn" type="button" class="detail-trigger-btn">View</button>
+            </div>
+            <p class="detail-trigger-copy">Collapsed by default. Open to view the full stage transition history.</p>
+          </div>
+        </article>
+
+        <article class="detail-card">
+          <div class="detail-modal-trigger">
+            <div class="detail-trigger-head">
+              <h2>Event Stream</h2>
+              <button id="detail-open-events-btn" type="button" class="detail-trigger-btn">Load on Demand</button>
+            </div>
+            <p class="detail-trigger-copy">Event stream is not loaded by default. Only loaded when clicked to avoid excessive traffic on shared pages.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <section id="detail-stage-history-modal" class="detail-modal hidden" aria-hidden="true">
+      <div class="detail-modal-panel" role="dialog" aria-modal="true" aria-labelledby="detail-stage-history-modal-title">
+        <div class="detail-modal-head">
+          <div>
+            <h2 id="detail-stage-history-modal-title" class="detail-modal-title">Stage Timeline</h2>
+            <p class="detail-modal-subtitle">Shows entry, exit, and duration per stage.</p>
+          </div>
+          <button id="detail-close-stage-history-btn" type="button" class="detail-modal-close" aria-label="Close">×</button>
+        </div>
+        <div class="detail-modal-body">
+          <div id="detail-stage-history-empty" class="detail-empty">No stage records</div>
+          <div id="detail-stage-history-list" class="detail-list hidden"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="detail-events-modal" class="detail-modal hidden" aria-hidden="true">
+      <div class="detail-modal-panel" role="dialog" aria-modal="true" aria-labelledby="detail-events-modal-title">
+        <div class="detail-modal-head">
+          <div>
+            <h2 id="detail-events-modal-title" class="detail-modal-title">Event Stream</h2>
+            <p class="detail-modal-subtitle">Full event stream is only requested when opened, then cached for the current page.</p>
+          </div>
+          <button id="detail-close-events-btn" type="button" class="detail-modal-close" aria-label="Close">×</button>
+        </div>
+        <div class="detail-modal-body">
+          <div id="detail-events-status" class="detail-modal-status">Not yet loaded</div>
+          <div id="detail-events-empty" class="detail-empty">No events</div>
+          <div id="detail-events-list" class="detail-list hidden"></div>
+        </div>
+      </div>
+    </section>
+    <script type="module" src="./src/js/job-detail.js"></script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+use std::fs::File;
+use std::io::{BufRead, BufReader};
+use std::path::Path;
+
+use crate::error::AppError;
+use crate::models::{JobEventRecord, JobSnapshot};
+use crate::storage_paths::resolve_events_jsonl;
+use serde::Deserialize;
+use serde_json::Value;
+
+#[derive(Debug, Clone)]
+pub struct LiveStageSnapshot {
+    pub stage: Option<String>,
+    pub stage_detail: Option<String>,
+    pub progress_current: Option<i64>,
+    pub progress_total: Option<i64>,
+}
+
+#[derive(Debug, Deserialize)]
+struct PipelineEventJsonlRecord {
+    #[serde(default)]
+    ts: Option<String>,
+    #[serde(default)]
+    level: Option<String>,
+    #[serde(default)]
+    stage: Option<String>,
+    #[serde(default)]
+    stage_detail: Option<String>,
+    #[serde(default)]
+    provider: Option<String>,
+    #[serde(default)]
+    provider_stage: Option<String>,
+    #[serde(default)]
+    event: Option<String>,
+    #[serde(default)]
+    event_type: Option<String>,
+    #[serde(default)]
+    message: Option<String>,
+    #[serde(default)]
+    progress_current: Option<i64>,
+    #[serde(default)]
+    progress_total: Option<i64>,
+    #[serde(default)]
+    retry_count: Option<u32>,
+    #[serde(default)]
+    elapsed_ms: Option<i64>,
+    #[serde(default)]
+    payload: Option<Value>,
+}
+
+pub fn load_live_stage_snapshot(job: &JobSnapshot, data_root: &Path) -> Option<LiveStageSnapshot> {
+    let items = load_pipeline_event_records(job, data_root, 0);
+    select_live_stage_snapshot(&items)
+}
+
+pub fn load_pipeline_event_records(
+    job: &JobSnapshot,
+    data_root: &Path,
+    base_seq: i64,
+) -> Vec<JobEventRecord> {
+    let Some(path) = resolve_events_jsonl(job, data_root) else {
+        return Vec::new();
+    };
+    load_pipeline_events_jsonl(&job.job_id, &path, base_seq)
+}
+
+pub fn list_combined_job_events(
+    db: &crate::db::Db,
+    data_root: &Path,
+    job: &JobSnapshot,
+) -> Result<Vec<JobEventRecord>, AppError> {
+    let mut items = db.list_job_events(&job.job_id, 10_000, 0)?;
+    let base_seq = items.iter().map(|item| item.seq).max().unwrap_or(0);
+    let mut file_items = load_pipeline_event_records(job, data_root, base_seq);
+    items.append(&mut file_items);
+    items.sort_by(|left, right| {
+        left.ts
+            .cmp(&right.ts)
+            .then_with(|| left.seq.cmp(&right.seq))
+            .then_with(|| left.event.cmp(&right.event))
+    });
+    for (index, item) in items.iter_mut().enumerate() {
+        item.seq = (index + 1) as i64;
+    }
+    Ok(items)
+}
+
+fn load_pipeline_events_jsonl(job_id: &str, path: &Path, base_seq: i64) -> Vec<JobEventRecord> {
+    let Ok(file) = File::open(path) else {
+        return Vec::new();
+    };
+    let reader = BufReader::new(file);
+    reader
+        .lines()
+        .enumerate()
+        .filter_map(|(index, line)| {
+            let line = line.ok()?;
+            let trimmed = line.trim();
+            if trimmed.is_empty() {
+                return None;
+            }
+            let parsed = serde_json::from_str::<PipelineEventJsonlRecord>(trimmed).ok()?;
+            let event = normalized_event_name(&parsed);
+            Some(JobEventRecord {
+                job_id: job_id.to_string(),
+                seq: base_seq + index as i64 + 1,
+                ts: parsed.ts.unwrap_or_default(),
+                level: parsed.level.unwrap_or_else(|| "info".to_string()),
+                stage: parsed.stage,
+                stage_detail: parsed.stage_detail,
+                provider: parsed.provider,
+                provider_stage: parsed.provider_stage,
+                event_type: Some(parsed.event_type.unwrap_or_else(|| event.clone())),
+                event,
+                message: parsed.message.unwrap_or_default(),
+                progress_current: parsed.progress_current,
+                progress_total: parsed.progress_total,
+                retry_count: parsed.retry_count,
+                elapsed_ms: parsed.elapsed_ms,
+                payload: Some(parsed.payload.unwrap_or(Value::Object(Default::default()))),
+            })
+        })
+        .collect()
+}
+
+fn select_live_stage_snapshot(items: &[JobEventRecord]) -> Option<LiveStageSnapshot> {
+    items
+        .iter()
+        .rev()
+        .find(|item| {
+            let event_type = item.event_type.as_deref().map(str::trim).unwrap_or("");
+            let stage = item.stage.as_deref().map(str::trim).unwrap_or("");
+            event_type != "artifact_published" && !stage.is_empty()
+        })
+        .map(|item| LiveStageSnapshot {
+            stage: item.stage.clone(),
+            stage_detail: item.stage_detail.clone(),
+            progress_current: item.progress_current,
+            progress_total: item.progress_total,
+        })
+}
+
+fn normalized_event_name(parsed: &PipelineEventJsonlRecord) -> String {
+    parsed
+        .event
+        .clone()
+        .or_else(|| parsed.event_type.clone())
+        .unwrap_or_else(|| "diagnostic".to_string())
+}

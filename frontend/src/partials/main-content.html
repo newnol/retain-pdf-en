@@ -1,0 +1,69 @@
+<main id="app-shell" class="page app-shell">
+  <app-shell-header></app-shell-header>
+
+  <section class="card workflow-card">
+    <div id="job-warning" class="job-warning hidden">The previous task is still processing. Please wait for it to complete before submitting a new PDF.</div>
+
+    <form id="job-form" class="form" novalidate>
+      <input id="ocr_provider" name="ocr_provider" type="hidden" value="mineru" />
+      <input id="mineru_token" name="mineru_token" type="hidden" value="" />
+      <input id="paddle_token" name="paddle_token" type="hidden" value="" />
+      <input id="api_key" name="api_key" type="hidden" value="" />
+
+      <div class="upload-tile upload-tile-hero">
+        <input id="file" name="file" type="file" accept="application/pdf,.pdf" />
+        <span id="upload-fill" class="upload-fill" aria-hidden="true"></span>
+        <div id="credential-gate" class="credential-gate hidden">
+          <div class="credential-gate-panel" aria-live="polite">
+            <span class="credential-gate-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M8 11V8a4 4 0 1 1 8 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="5" y="11" width="14" height="10" rx="3" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="12" cy="16" r="1.2" fill="currentColor"/>
+              </svg>
+            </span>
+            <strong id="credential-gate-title">Please complete API settings first</strong>
+            <em id="credential-gate-help">You can modify OCR Provider credentials and DeepSeek Key at any time using the settings button. Fill them in to upload PDFs.</em>
+          </div>
+        </div>
+        <span id="upload-glyph" class="upload-glyph" aria-hidden="true">
+          <span class="upload-glyph-h"></span>
+          <span class="upload-glyph-v"></span>
+        </span>
+        <strong id="file-label">Drag or click to upload PDF</strong>
+        <em id="upload-help">File validation will be performed after upload before task processing begins.</em>
+        <div class="upload-meta upload-meta-inline">
+          <span>Single PDF</span>
+          <span>Max 100MB</span>
+          <span>Max 100 pages</span>
+        </div>
+        <div id="upload-status" class="upload-status hidden">No file selected</div>
+        <div id="upload-progress-panel" class="upload-progress-panel hidden" aria-live="polite">
+          <span id="upload-progress-text">Uploading</span>
+        </div>
+        <div id="upload-action-slot" class="upload-action-slot hidden">
+          <div class="upload-action-group">
+            <button id="page-range-btn" type="button" class="page-range-mini secondary" aria-label="Page Range Translation" title="Page Range Translation">Page Range</button>
+            <button id="submit-btn" type="submit" disabled>Full Translation</button>
+          </div>
+        </div>
+      <page-range-summary id="page-range-summary" class="hidden">Selected pages: -</page-range-summary>
+      </div>
+      <inline-error-box id="error-box-inline" class="hidden">-</inline-error-box>
+    </form>
+  </section>
+
+  <job-status-card id="status-section"></job-status-card>
+
+  <div class="query-entry">
+    <button id="open-query-btn" type="button" class="secondary">Recent Jobs</button>
+    <button id="credentials-btn" type="button" class="icon-button secondary" aria-label="API Settings" title="API Settings">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.2 7.2 0 0 0-1.63-.94l-.36-2.54a.5.5 0 0 0-.49-.42h-3.84a.5.5 0 0 0-.49.42l-.36 2.54c-.58.22-1.12.54-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.84a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.5.4 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .49.42h3.84a.5.5 0 0 0 .49-.42l.36-2.54c.58-.22 1.13-.54 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58Z" stroke="currentColor" stroke-width="1.45" stroke-linejoin="round"/>
+        <circle cx="12" cy="12" r="2.9" stroke="currentColor" stroke-width="1.45"/>
+      </svg>
+    </button>
+  </div>
+
+  <recent-jobs-dialog></recent-jobs-dialog>
+</main>

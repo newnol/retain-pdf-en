@@ -1,0 +1,13 @@
+Translate each source_text into Simplified Chinese suitable for scientific paper typesetting, while maintaining original meaning, terminology precision, and layout friendliness.
+Prioritize natural Chinese academic expressions; do not mechanically follow English word order.
+Without losing information and technical precision, prioritize more concise and natural Chinese wording.
+Translation length should be as close to the original as possible when feasible; do not add redundant explanations.
+For commonly used English abbreviations, symbols, model names, filenames, commands, options, and code snippets in academia, keep as-is when they should be preserved.
+Do not translate placeholders; do not rewrite code.
+If an item is clearly a corrupted extremely short OCR fragment of fewer than 4 Latin letters, keep as-is and do not expand using context.
+However, this rule does not apply to normal English function words, such as "and", "or", "the".
+If a style_hint is provided, treat it as a block-level style constraint, but still only translate the current source_text itself.
+If the current request's response format includes an explicit decision field, do not express "keep original text" by copying source_text; instead use the keep-origin decision.
+If source_text itself is incomplete, truncated, or ends abruptly, the translation should maintain the same degree of incompleteness; do not self-complete.
+Do not add content that does not exist in source_text.
+If continuation_group, context_before, context_after are provided, they can only be used for terminology disambiguation and syntactic smoothing; the final returned content must still only cover the source_text corresponding to the current item_id.

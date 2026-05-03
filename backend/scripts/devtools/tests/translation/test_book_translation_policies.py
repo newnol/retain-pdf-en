@@ -1,0 +1,940 @@
+import sys
+import tempfile
+from pathlib import Path
+
+
+REPO_SCRIPTS_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_SCRIPTS_ROOT))
+
+
+from runtime.pipeline.book_translation_policies import finalize_page_payloads
+from services.translation.policy.flow import apply_translation_policies
+from services.translation.policy.config import build_translation_policy_config
+from services.translation.payload.parts.legacy_policy_mutations import apply_mixed_literal_split_policy
+from services.translation.payload.parts.legacy_policy_mutations import apply_cjk_source_keep_origin
+from services.translation.payload.parts.legacy_policy_mutations import apply_ref_text_skip
+from services.translation.payload.parts.policy_mutations import apply_reference_zone_skip
+from services.translation.payload.parts.policy_mutations import apply_title_skip
+
+
+def _page_payload_item(
+    *,
+    item_id: str,
+    page_idx: int,
+    text: str,
+    bbox: list[float],
+    group_id: str,
+    order: int,
+) -> dict:
+    return {
+        "item_id": item_id,
+        "page_idx": page_idx,
+        "block_idx": 0,
+        "block_type": "text",
+        "block_kind": "text",
+        "layout_role": "paragraph",
+        "semantic_role": "body",
+        "structure_role": "body",
+        "policy_translate": True,
+        "raw_block_type": "text",
+        "normalized_sub_type": "",
+        "bbox": bbox,
+        "source_text": text,
+        "protected_source_text": text,
+        "formula_map": [],
+        "classification_label": "",
+        "should_translate": True,
+        "ocr_continuation_source": "provider",
+        "ocr_continuation_group_id": group_id,
+        "ocr_continuation_role": "head" if order == 0 else "tail",
+        "ocr_continuation_scope": "cross_page",
+        "ocr_continuation_reading_order": order,
+        "layout_mode": "",
+        "layout_split_x": 0.0,
+        "layout_zone": "",
+        "layout_zone_rank": -1,
+        "layout_zone_size": 0,
+        "layout_boundary_role": "",
+        "continuation_group": "",
+        "continuation_prev_text": "",
+        "continuation_next_text": "",
+        "continuation_decision": "",
+        "continuation_candidate_prev_id": "",
+        "continuation_candidate_next_id": "",
+        "translation_unit_id": item_id,
+        "translation_unit_kind": "single",
+        "translation_unit_member_ids": [item_id],
+        "translation_unit_protected_source_text": text,
+        "translation_unit_formula_map": [],
+    }
+
+
+def test_finalize_page_payloads_annotates_layout_before_cross_page_provider_join() -> None:
+    group_id = "provider-generic-global-1"
+    page_payloads = {
+        0: [
+            _page_payload_item(
+                item_id="p001-b000",
+                page_idx=0,
+                text="This sentence continues with enough context",
+                bbox=[0, 0, 180, 20],
+                group_id=group_id,
+                order=0,
+            )
+        ],
+        1: [
+            _page_payload_item(
+                item_id="p002-b000",
+                page_idx=1,
+                text="and additional evidence from the next page.",
+                bbox=[0, 0, 180, 20],
+                group_id=group_id,
+                order=1,
+            )
+        ],
+    }
+
+    with tempfile.TemporaryDirectory() as tmp:
+        translation_paths = {
+            0: Path(tmp) / "page-001.json",
+            1: Path(tmp) / "page-002.json",
+        }
+        summary = finalize_page_payloads(
+            page_payloads=page_payloads,
+            translation_paths=translation_paths,
+        )
+
+    assert summary["provider_joined_items"] == 2
+    assert page_payloads[0][0]["layout_zone"] == "single_column"
+    assert page_payloads[1][0]["layout_zone"] == "single_column"
+    assert page_payloads[0][0]["continuation_decision"] == "provider_joined"
+    assert page_payloads[1][0]["continuation_decision"] == "provider_joined"
+    assert page_payloads[0][0]["continuation_group"] == group_id
+
+
+def test_finalize_page_payloads_does_not_join_figure_caption_with_body_text() -> None:
+    page_payloads = {
+        2: [
+            {
+                "item_id": "p003-b008",
+                "page_idx": 2,
+                "block_idx": 8,
+                "block_type": "text",
+                "block_kind": "text",
+                "layout_role": "paragraph",
+                "semantic_role": "body",
+                "structure_role": "body",
+                "policy_translate": True,
+                "raw_block_type": "text",
+                "normalized_sub_type": "",
+                "bbox": [60, 240, 270, 360],
+                "source_text": "This is a body paragraph that ends with the",
+                "protected_source_text": "This is a body paragraph that ends with the",
+                "formula_map": [],
+                "classification_label": "",
+                "should_translate": True,
+                "layout_mode": "double",
+                "layout_split_x": 300.0,
+                "layout_zone": "",
+                "layout_zone_rank": -1,
+                "layout_zone_size": 0,
+                "layout_boundary_role": "",
+                "continuation_group": "",
+                "continuation_prev_text": "",
+                "continuation_next_text": "",
+                "continuation_decision": "",
+                "continuation_candidate_prev_id": "",
+                "continuation_candidate_next_id": "",
+                "translation_unit_id": "p003-b008",
+                "translation_unit_kind": "single",
+                "translation_unit_member_ids": ["p003-b008"],
+                "translation_unit_protected_source_text": "This is a body paragraph that ends with the",
+                "translation_unit_formula_map": [],
+            },
+            {
+                "item_id": "p003-b010",
+                "page_idx": 2,
+                "block_idx": 10,
+                "block_type": "text",
+                "block_kind": "text",
+                "layout_role": "caption",
+                "semantic_role": "caption",
+                "structure_role": "figure_caption",
+                "policy_translate": True,
+                "raw_block_type": "figure_title",
+                "normalized_sub_type": "figure_caption",
+                "bbox": [330, 240, 550, 300],
+                "source_text": "FIG. 3. Final electronic structure spectrum.",
+                "protected_source_text": "FIG. 3. Final electronic structure spectrum.",
+                "formula_map": [],
+                "classification_label": "",
+                "should_translate": True,
+                "layout_mode": "double",
+                "layout_split_x": 300.0,
+                "layout_zone": "",
+                "layout_zone_rank": -1,
+                "layout_zone_size": 0,
+                "layout_boundary_role": "",
+                "continuation_group": "",
+                "continuation_prev_text": "",
+                "continuation_next_text": "",
+                "continuation_decision": "",
+                "continuation_candidate_prev_id": "",
+                "continuation_candidate_next_id": "",
+                "translation_unit_id": "p003-b010",
+                "translation_unit_kind": "single",
+                "translation_unit_member_ids": ["p003-b010"],
+                "translation_unit_protected_source_text": "FIG. 3. Final electronic structure spectrum.",
+                "translation_unit_formula_map": [],
+            },
+        ],
+    }
+
+    with tempfile.TemporaryDirectory() as tmp:
+        translation_paths = {2: Path(tmp) / "page-003.json"}
+        summary = finalize_page_payloads(
+            page_payloads=page_payloads,
+            translation_paths=translation_paths,
+        )
+
+    body, caption = page_payloads[2]
+    assert summary["joined_items"] == 0
+    assert body["continuation_group"] == ""
+    assert body["continuation_candidate_next_id"] == ""
+    assert caption["continuation_group"] == ""
+    assert caption["continuation_candidate_prev_id"] == ""
+    assert caption["translation_unit_id"] == "p003-b010"
+
+
+def test_policy_config_defaults_keep_legacy_skip_rules_disabled() -> None:
+    config = build_translation_policy_config(mode="sci", skip_title_translation=False)
+
+    assert config.enable_narrow_body_noise_skip is False
+    assert config.enable_metadata_fragment_skip is False
+
+
+def test_policy_config_honors_explicit_true_skip_rule_overrides() -> None:
+    config = build_translation_policy_config(
+        mode="sci",
+        skip_title_translation=False,
+        enable_narrow_body_noise_skip=True,
+        enable_metadata_fragment_skip=True,
+    )
+
+    assert config.enable_narrow_body_noise_skip is True
+    assert config.enable_metadata_fragment_skip is True
+
+
+def test_policy_config_honors_explicit_false_skip_rule_overrides() -> None:
+    config = build_translation_policy_config(
+        mode="sci",
+        skip_title_translation=False,
+        enable_narrow_body_noise_skip=False,
+        enable_metadata_fragment_skip=False,
+    )
+
+    assert config.enable_narrow_body_noise_skip is False
+    assert config.enable_metadata_fragment_skip is False
+
+
+def test_policy_config_mixes_override_and_default_skip_rule_values() -> None:
+    config = build_translation_policy_config(
+        mode="sci",
+        skip_title_translation=False,
+        enable_narrow_body_noise_skip=True,
+    )
+
+    assert config.enable_narrow_body_noise_skip is True
+    assert config.enable_metadata_fragment_skip is False
+
+
+def test_policy_config_keeps_metadata_fragment_page_idx_contract() -> None:
+    default_config = build_translation_policy_config(mode="sci", skip_title_translation=False)
+    overridden_config = build_translation_policy_config(
+        mode="sci",
+        skip_title_translation=False,
+        metadata_fragment_max_page_idx=3,
+    )
+
+    assert default_config.metadata_fragment_max_page_idx == 8
+    assert overridden_config.metadata_fragment_max_page_idx == 3
+
+
+def test_policy_config_honors_skip_title_translation_false() -> None:
+    config = build_translation_policy_config(mode="sci", skip_title_translation=False)
+    assert config.enable_title_skip is False
+
+
+def test_policy_config_honors_skip_title_translation_true() -> None:
+    config = build_translation_policy_config(mode="sci", skip_title_translation=True)
+    assert config.enable_title_skip is True
+
+
+def test_apply_title_skip_preserves_source_text_for_render_fallback() -> None:
+    payload = [
+        {
+            "item_id": "p001-b000",
+            "block_type": "title",
+            "block_kind": "text",
+            "layout_role": "title",
+            "semantic_role": "unknown",
+            "structure_role": "title",
+            "policy_translate": False,
+            "raw_block_type": "title",
+            "normalized_sub_type": "title",
+            "metadata": {
+                "content_kind": "text",
+                "layout_role": "title",
+                "semantic_role": "unknown",
+                "structure_role": "title",
+                "policy_translate": False,
+            },
+            "source_text": "Introduction",
+            "protected_source_text": "Introduction",
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+        }
+    ]
+
+    skipped = apply_title_skip(payload)
+
+    assert skipped == 1
+    assert payload[0]["should_translate"] is False
+    assert payload[0]["skip_reason"] == "skip_title"
+    assert payload[0]["translated_text"] == "Introduction"
+    assert payload[0]["protected_translated_text"] == "Introduction"
+
+
+def test_apply_cjk_source_keep_origin_skips_cjk_body_text() -> None:
+    payload = [
+        {
+            "item_id": "p036-b015",
+            "page_idx": 35,
+            "block_idx": 15,
+            "block_type": "text",
+            "block_kind": "text",
+            "layout_role": "paragraph",
+            "semantic_role": "body",
+            "structure_role": "body",
+            "policy_translate": True,
+            "raw_block_type": "text",
+            "normalized_sub_type": "",
+            "source_text": "In summary, this paper systematically reviews the wide application of DFT calculations in photocatalysis and provides reference for future development of efficient and stable catalysts.",
+            "protected_source_text": "In summary, this paper systematically reviews the wide application of DFT calculations in photocatalysis and provides reference for future development of efficient and stable catalysts.",
+            "metadata": {"structure_role": "body"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+        }
+    ]
+
+    skipped = apply_cjk_source_keep_origin(payload)
+
+    assert skipped == 1
+    assert payload[0]["classification_label"] == "skip_cjk_source_body"
+    assert payload[0]["should_translate"] is False
+    assert payload[0]["skip_reason"] == "skip_cjk_source_body"
+    assert payload[0]["translated_text"] == payload[0]["source_text"]
+    assert payload[0]["protected_translated_text"] == payload[0]["protected_source_text"]
+    assert payload[0]["final_status"] == "kept_origin"
+
+
+def test_apply_reference_zone_skip_uses_top_level_contract_fields_without_metadata() -> None:
+    payload = [
+        {
+            "item_id": "p010-b001",
+            "page_idx": 9,
+            "block_idx": 8,
+            "block_type": "text",
+            "block_kind": "text",
+            "layout_role": "heading",
+            "semantic_role": "reference",
+            "structure_role": "reference_heading",
+            "source_text": "References",
+            "protected_source_text": "References",
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        },
+        {
+            "item_id": "p010-b002",
+            "page_idx": 9,
+            "block_idx": 9,
+            "block_type": "text",
+            "block_kind": "text",
+            "layout_role": "paragraph",
+            "semantic_role": "reference",
+            "structure_role": "reference_entry",
+            "source_text": "[1] Example reference entry.",
+            "protected_source_text": "[1] Example reference entry.",
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        },
+    ]
+
+    skipped = apply_reference_zone_skip(
+        payload,
+        page_idx=9,
+        cutoff_page_idx=9,
+        cutoff_block_idx=8,
+    )
+
+    assert skipped == 2
+    assert payload[0]["skip_reason"] == "skip_reference_heading"
+    assert payload[1]["skip_reason"] == "skip_reference_zone"
+
+
+def test_apply_ref_text_skip_uses_top_level_normalized_sub_type_without_metadata() -> None:
+    payload = [
+        {
+            "item_id": "p011-b003",
+            "block_type": "text",
+            "block_kind": "text",
+            "normalized_sub_type": "ref_text",
+            "source_text": "[12] Stewart, J. J. P. Gaussian expansions for orbitals.",
+            "protected_source_text": "[12] Stewart, J. J. P. Gaussian expansions for orbitals.",
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        }
+    ]
+
+    skipped = apply_ref_text_skip(payload)
+
+    assert skipped == 1
+    assert payload[0]["skip_reason"] == "skip_ref_text"
+    assert payload[0]["final_status"] == "kept_origin"
+
+
+def test_apply_translation_policies_does_not_skip_cjk_body_text_by_default() -> None:
+    payload = [
+        {
+            "item_id": "p001-b000",
+            "page_idx": 0,
+            "block_idx": 0,
+            "block_type": "text",
+            "source_text": "In summary, this paper systematically reviews the wide application of DFT calculations in photocatalysis and provides reference for future development of efficient and stable catalysts.",
+            "protected_source_text": "In summary, this paper systematically reviews the wide application of DFT calculations in photocatalysis and provides reference for future development of efficient and stable catalysts.",
+            "metadata": {"structure_role": "body"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "In summary, this paper systematically reviews the wide application of DFT calculations in photocatalysis and provides reference for future development of efficient and stable catalysts.",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "",
+        }
+    ]
+
+    apply_translation_policies(
+        payload=payload,
+        mode="sci",
+        classify_batch_size=8,
+        workers=1,
+        api_key="",
+        model="deepseek-chat",
+        base_url="https://api.deepseek.com/v1",
+        skip_title_translation=False,
+        page_idx=0,
+        sci_cutoff_page_idx=None,
+        sci_cutoff_block_idx=None,
+        policy_config=build_translation_policy_config(
+            mode="sci",
+            skip_title_translation=False,
+            enable_reference_zone_skip=False,
+        ),
+    )
+
+    assert payload[0]["should_translate"] is True
+    assert payload[0]["skip_reason"] == ""
+    assert payload[0]["classification_label"] == ""
+
+
+def test_apply_translation_policies_skips_table_body_by_default() -> None:
+    payload = [
+        {
+            "item_id": "p004-b003",
+            "page_idx": 3,
+            "block_idx": 3,
+            "block_type": "table_body",
+            "source_text": "<table><tr><td>Indigo</td><td>Absorption</td></tr></table>",
+            "protected_source_text": "<table><tr><td>Indigo</td><td>Absorption</td></tr></table>",
+            "metadata": {"structure_role": "body", "normalized_sub_type": "table_html"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "<table><tr><td>Indigo</td><td>Absorption</td></tr></table>",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "translated",
+            "layout_zone": "non_flow",
+        }
+    ]
+
+    apply_translation_policies(
+        payload=payload,
+        mode="sci",
+        classify_batch_size=8,
+        workers=1,
+        api_key="",
+        model="deepseek-chat",
+        base_url="https://api.deepseek.com/v1",
+        skip_title_translation=False,
+        page_idx=3,
+        sci_cutoff_page_idx=None,
+        sci_cutoff_block_idx=None,
+        policy_config=build_translation_policy_config(
+            mode="sci",
+            skip_title_translation=False,
+            enable_reference_zone_skip=False,
+        ),
+    )
+
+    assert payload[0]["should_translate"] is False
+    assert payload[0]["skip_reason"] == "skip_table_body"
+    assert payload[0]["classification_label"] == "skip_table_body"
+    assert payload[0]["final_status"] == "kept_origin"
+
+
+def test_apply_translation_policies_skips_non_body_text_blocks_by_default() -> None:
+    payload = [
+            {
+                "item_id": "p004-b002",
+                "page_idx": 3,
+                "block_idx": 2,
+                "block_type": "table_caption",
+                "block_kind": "text",
+                "layout_role": "caption",
+                "semantic_role": "caption",
+                "structure_role": "table_caption",
+                "policy_translate": False,
+                "raw_block_type": "table_caption",
+                "normalized_sub_type": "table_caption",
+                "source_text": "Table 1 Calculation results",
+            "protected_source_text": "Table 1 Calculation results",
+            "metadata": {"structure_role": "table_caption", "normalized_sub_type": "table_caption"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "Table 1 Calculation results",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "non_flow",
+        },
+            {
+                "item_id": "p005-b004",
+                "page_idx": 4,
+                "block_idx": 4,
+                "block_type": "table_footnote",
+                "block_kind": "text",
+                "layout_role": "caption",
+                "semantic_role": "",
+                "structure_role": "table_footnote",
+                "policy_translate": False,
+                "raw_block_type": "table_footnote",
+                "normalized_sub_type": "table_footnote",
+                "source_text": "Absorption and emission transitions are also shown.",
+            "protected_source_text": "Absorption and emission transitions are also shown.",
+            "metadata": {"structure_role": "table_footnote", "normalized_sub_type": "table_footnote"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "Absorption and emission transitions are also shown.",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "non_flow",
+        },
+            {
+                "item_id": "p005-b005",
+                "page_idx": 4,
+                "block_idx": 5,
+                "block_type": "text",
+                "block_kind": "text",
+                "layout_role": "",
+                "semantic_role": "",
+                "structure_role": "header",
+                "policy_translate": False,
+                "raw_block_type": "text",
+                "normalized_sub_type": "header",
+                "source_text": "Journal of Fluorescence 2024, 19, 100-110",
+            "protected_source_text": "Journal of Fluorescence 2024, 19, 100-110",
+            "metadata": {"structure_role": "header", "normalized_sub_type": "header"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "Journal of Fluorescence 2024, 19, 100-110",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "non_flow",
+        },
+    ]
+
+    apply_translation_policies(
+        payload=payload,
+        mode="sci",
+        classify_batch_size=8,
+        workers=1,
+        api_key="",
+        model="deepseek-chat",
+        base_url="https://api.deepseek.com/v1",
+        skip_title_translation=False,
+        page_idx=3,
+        sci_cutoff_page_idx=None,
+        sci_cutoff_block_idx=None,
+        policy_config=build_translation_policy_config(
+            mode="sci",
+            skip_title_translation=False,
+            enable_reference_zone_skip=False,
+        ),
+    )
+
+    assert payload[0]["should_translate"] is False
+    assert payload[0]["skip_reason"] == "skip_table_caption"
+    assert payload[0]["classification_label"] == "skip_table_caption"
+    assert payload[1]["should_translate"] is False
+    assert payload[1]["skip_reason"] == "skip_table_footnote"
+    assert payload[1]["classification_label"] == "skip_table_footnote"
+    assert payload[2]["should_translate"] is False
+    assert payload[2]["skip_reason"] == "skip_text"
+    assert payload[2]["classification_label"] == "skip_text"
+
+
+def test_apply_translation_policies_translates_figure_caption_by_default() -> None:
+    payload = [
+        {
+            "item_id": "p004-b002",
+            "page_idx": 3,
+            "block_idx": 2,
+            "block_type": "text",
+            "block_kind": "text",
+            "layout_role": "caption",
+            "semantic_role": "caption",
+            "structure_role": "figure_caption",
+            "policy_translate": True,
+            "raw_block_type": "text",
+            "normalized_sub_type": "figure_caption",
+            "source_text": "Figure 3: Overall pipeline.",
+            "protected_source_text": "Figure 3: Overall pipeline.",
+            "metadata": {"structure_role": "figure_caption", "normalized_sub_type": "figure_caption"},
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": "Figure 3: Overall pipeline.",
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "non_flow",
+        },
+    ]
+
+    apply_translation_policies(
+        payload=payload,
+        mode="sci",
+        classify_batch_size=8,
+        workers=1,
+        api_key="",
+        model="deepseek-chat",
+        base_url="https://api.deepseek.com/v1",
+        skip_title_translation=False,
+        page_idx=3,
+        sci_cutoff_page_idx=None,
+        sci_cutoff_block_idx=None,
+        policy_config=build_translation_policy_config(
+            mode="sci",
+            skip_title_translation=False,
+            enable_reference_zone_skip=False,
+        ),
+    )
+
+    assert payload[0]["should_translate"] is True
+    assert payload[0]["skip_reason"] == ""
+    assert payload[0]["classification_label"] == ""
+
+
+def test_apply_mixed_literal_split_policy_forces_bad_ocr_prose_to_translate_all(monkeypatch) -> None:
+    payload = [
+        {
+            "item_id": "p005-b005",
+            "page_idx": 4,
+            "block_idx": 5,
+            "block_type": "text",
+            "source_text": (
+                "ch vertices with = 1, ( c = 2 , 1 are seen. s = 0 and j < m - 1 bump i "
+                "aude s = 0 d cy j = m - 1 ) is gov k ned 0 < s < m - 1 more i < m - 1 "
+                "rules: If 0 < s < m - 1, i = m - 1 If = j and s = m - 1 1, bum i ."
+            ),
+            "protected_source_text": (
+                "ch vertices with = 1, ( c = 2 , 1 are seen. s = 0 and j < m - 1 bump i "
+                "aude s = 0 d cy j = m - 1 ) is gov k ned 0 < s < m - 1 more i < m - 1 "
+                "rules: If 0 < s < m - 1, i = m - 1 If = j and s = m - 1 1, bum i ."
+            ),
+            "mixed_original_protected_source_text": (
+                "ch vertices with = 1, ( c = 2 , 1 are seen. s = 0 and j < m - 1 bump i "
+                "aude s = 0 d cy j = m - 1 ) is gov k ned 0 < s < m - 1 more i < m - 1 "
+                "rules: If 0 < s < m - 1, i = m - 1 If = j and s = m - 1 1, bum i ."
+            ),
+            "metadata": {"structure_role": "body"},
+            "classification_label": "translate_literal",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": (
+                "ch vertices with = 1, ( c = 2 , 1 are seen. s = 0 and j < m - 1 bump i "
+                "aude s = 0 d cy j = m - 1 ) is gov k ned 0 < s < m - 1 more i < m - 1 "
+                "rules: If 0 < s < m - 1, i = m - 1 If = j and s = m - 1 1, bum i ."
+            ),
+            "translation_unit_member_ids": ["p005-b005"],
+        }
+    ]
+
+    monkeypatch.setattr(
+        "services.translation.payload.parts.legacy_policy_mutations.split_mixed_literal_items",
+        lambda *args, **kwargs: {"p005-b005": ("keep_all", "")},
+    )
+
+    summary = apply_mixed_literal_split_policy(
+        payload,
+        api_key="test",
+        model="test",
+        base_url="http://example.com",
+        workers=1,
+    )
+
+    assert summary["mixed_keep_all"] == 0
+    assert summary["mixed_translate_all"] == 1
+    assert payload[0]["classification_label"] == "translate_mixed_all"
+    assert payload[0]["should_translate"] is True
+    assert payload[0]["skip_reason"] == ""
+
+
+def test_apply_ref_text_skip_preserves_numbered_summary_prose() -> None:
+    payload = [
+        {
+            "item_id": "p012-b001",
+            "block_type": "text",
+            "source_text": (
+                "1. Consider frontier molecular orbital (FMO) distribution. "
+                "Adding donor or acceptor groups to positions where only one FMO is localized, "
+                "a specific FMO is electronically modulated without affecting the other."
+            ),
+            "protected_source_text": (
+                "1. Consider frontier molecular orbital (FMO) distribution. "
+                "Adding donor or acceptor groups to positions where only one FMO is localized, "
+                "a specific FMO is electronically modulated without affecting the other."
+            ),
+            "metadata": {
+                "ocr_sub_type": "metadata",
+                "normalized_sub_type": "metadata",
+                "source": {"raw_type": "ref_text"},
+            },
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        }
+    ]
+
+    skipped = apply_ref_text_skip(payload)
+
+    assert skipped == 0
+    assert payload[0]["should_translate"] is True
+    assert payload[0]["skip_reason"] == ""
+
+
+def test_apply_translation_policies_preserves_numbered_summary_ref_text_prose() -> None:
+    payload = [
+        {
+            "item_id": "p012-b001",
+            "page_idx": 11,
+            "block_idx": 1,
+            "block_type": "text",
+            "source_text": (
+                "1. Consider frontier molecular orbital (FMO) distribution. "
+                "Adding donor or acceptor groups to positions where only one FMO is localized, "
+                "a specific FMO is electronically modulated without affecting the other."
+            ),
+            "protected_source_text": (
+                "1. Consider frontier molecular orbital (FMO) distribution. "
+                "Adding donor or acceptor groups to positions where only one FMO is localized, "
+                "a specific FMO is electronically modulated without affecting the other."
+            ),
+            "metadata": {
+                "ocr_sub_type": "metadata",
+                "normalized_sub_type": "metadata",
+                "source": {"raw_type": "ref_text"},
+            },
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+            "translation_unit_kind": "single",
+            "translation_unit_protected_source_text": (
+                "1. Consider frontier molecular orbital (FMO) distribution. "
+                "Adding donor or acceptor groups to positions where only one FMO is localized, "
+                "a specific FMO is electronically modulated without affecting the other."
+            ),
+            "translation_unit_formula_map": [],
+            "formula_map": [],
+            "mixed_original_protected_source_text": "",
+            "translation_unit_protected_translated_text": "",
+            "translation_unit_translated_text": "",
+            "protected_translated_text": "",
+            "translated_text": "",
+            "group_protected_translated_text": "",
+            "group_translated_text": "",
+            "final_status": "",
+            "layout_zone": "",
+        }
+    ]
+
+    apply_translation_policies(
+        payload=payload,
+        mode="sci",
+        classify_batch_size=8,
+        workers=1,
+        api_key="",
+        model="deepseek-chat",
+        base_url="https://api.deepseek.com/v1",
+        skip_title_translation=False,
+        page_idx=11,
+        sci_cutoff_page_idx=None,
+        sci_cutoff_block_idx=None,
+        policy_config=build_translation_policy_config(
+            mode="sci",
+            skip_title_translation=False,
+            enable_reference_zone_skip=False,
+        ),
+    )
+
+    assert payload[0]["should_translate"] is True
+    assert payload[0]["skip_reason"] == ""
+    assert payload[0]["classification_label"] == ""
+
+
+def test_apply_ref_text_skip_still_skips_reference_entry() -> None:
+    payload = [
+            {
+                "item_id": "p012-b017",
+                "block_type": "text",
+                "block_kind": "text",
+                "layout_role": "",
+                "semantic_role": "",
+                "structure_role": "",
+                "policy_translate": True,
+                "raw_block_type": "ref_text",
+                "normalized_sub_type": "metadata",
+                "source_text": "[1] A. H. Coons, H. J. Creech, R. N. Jones, E. Berliner, J. Immunol. 1949, 45, 159-170.",
+            "protected_source_text": "[1] A. H. Coons, H. J. Creech, R. N. Jones, E. Berliner, J. Immunol. 1949, 45, 159-170.",
+            "metadata": {
+                "ocr_sub_type": "metadata",
+                "normalized_sub_type": "metadata",
+                "source": {"raw_type": "ref_text"},
+            },
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        }
+    ]
+
+    skipped = apply_ref_text_skip(payload)
+
+    assert skipped == 1
+    assert payload[0]["classification_label"] == "skip_ref_text"
+    assert payload[0]["should_translate"] is False
+
+
+def test_apply_ref_text_skip_still_skips_numbered_reference_entry() -> None:
+    payload = [
+            {
+                "item_id": "p013-b007",
+                "block_type": "text",
+                "block_kind": "text",
+                "layout_role": "",
+                "semantic_role": "",
+                "structure_role": "",
+                "policy_translate": True,
+                "raw_block_type": "ref_text",
+                "normalized_sub_type": "metadata",
+                "source_text": "1. Smith J. Molecular spectroscopy and orbital effects in aromatic systems.",
+            "protected_source_text": "1. Smith J. Molecular spectroscopy and orbital effects in aromatic systems.",
+            "metadata": {
+                "ocr_sub_type": "metadata",
+                "normalized_sub_type": "metadata",
+                "source": {"raw_type": "ref_text"},
+            },
+            "classification_label": "",
+            "should_translate": True,
+            "skip_reason": "",
+        }
+    ]
+
+    skipped = apply_ref_text_skip(payload)
+
+    assert skipped == 1
+    assert payload[0]["classification_label"] == "skip_ref_text"
+    assert payload[0]["should_translate"] is False

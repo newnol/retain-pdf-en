@@ -1,0 +1,11 @@
+Please read the first two pages of this PDF and determine its academic or technical domain.
+
+Then write a concise Chinese guide for subsequent full-book translation.
+
+This guide should at least help the translation model:
+- Maintain stable and consistent domain terminology
+- Preserve English abbreviations, model names, symbols, commands, filenames, and code when needed
+- Use natural, accurate Chinese conforming to academic register
+- Avoid over-paraphrasing or unfounded expansion
+- Prioritize common Chinese terminology in the domain
+- When mathematical expressions, variables, chemical formulas, subscripts/superscripts, or unit powers appear in the content, first understand the semantics, then actively wrap parts that should be displayed as formulas with `$...$`

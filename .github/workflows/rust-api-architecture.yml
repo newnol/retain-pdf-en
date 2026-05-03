@@ -1,0 +1,36 @@
+name: Rust API Architecture
+
+"on":
+  pull_request:
+    paths:
+      - "backend/rust_api/**"
+      - ".github/workflows/rust-api-architecture.yml"
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - "backend/rust_api/**"
+      - ".github/workflows/rust-api-architecture.yml"
+
+jobs:
+  rust-api-architecture:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Architecture Check
+        run: python3 backend/rust_api/scripts/check_architecture.py
+
+      - name: Cargo Build
+        run: cargo build --manifest-path backend/rust_api/Cargo.toml
+
+      - name: Runner Smoke Test
+        run: cargo test --manifest-path backend/rust_api/Cargo.toml --lib job_runner::process_runner::tests::execute_process_job_injects_provider_and_translation_envs
+
+      - name: Route Redaction Smoke Test
+        run: cargo test --manifest-path backend/rust_api/Cargo.toml --lib routes::jobs::query::tests::job_detail_and_events_routes_redact_secrets
