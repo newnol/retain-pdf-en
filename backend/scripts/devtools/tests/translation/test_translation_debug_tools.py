@@ -144,6 +144,15 @@ def test_replay_translation_item_returns_result_without_mutating_payload(monkeyp
                 "continuation_group": "",
                 "math_mode": "placeholder",
                 "layout_zone": "",
+                "block_kind": "text",
+                "layout_role": "paragraph",
+                "semantic_role": "body",
+                "structure_role": "body",
+                "policy_translate": True,
+                "asset_id": "",
+                "reading_order": 0,
+                "raw_block_type": "text",
+                "normalized_sub_type": "",
             }
         ]
         payload_path = job_root / "translated" / "page-001-deepseek.json"
