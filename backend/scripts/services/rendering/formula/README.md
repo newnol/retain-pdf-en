@@ -1,30 +1,30 @@
-# Formula Rendering 说明
+# Formula Rendering Notes
 
-`services/rendering/formula/` 只负责一件事：
+`services/rendering/formula/` is only responsible for one thing:
 
-把“带公式的翻译文本”整理成渲染阶段可用的文本形态。
+Turning "translated text with formulas" into a text form usable by the rendering stage.
 
-这里不负责：
+This module is NOT responsible for:
 
-- OCR 公式检测
-- 翻译模型调用
-- PDF 页面排版
-- Typst 整页编译
+- OCR formula detection
+- Translation model invocation
+- PDF page layout
+- Typst full-page compilation
 
-它只是渲染链里的一个小模块，负责“公式文本怎么进入渲染主链”。
+It's just a small module in the rendering chain, responsible for "how formula text enters the main rendering pipeline."
 
-## 当前设计原则
+## Current Design Principles
 
-当前这块已经按两条线拆开：
+This area is currently split along two lines:
 
 - `core/`
-  主链。放现在正常渲染一定会经过的逻辑。
+  Main pipeline. Contains logic that must be executed during normal rendering.
 - `fallback/`
-  兜底链。放历史兼容、placeholder 路径、LaTeX-ish 修补、公式 PNG 渲染。
+  Fallback pipeline. Contains legacy compatibility, placeholder paths, LaTeX-ish fixes, and formula PNG rendering.
 
-不要再使用 `shared/`、`modes/` 这种语义模糊的目录名。
+Do not use semantically ambiguous directory names like `shared/` or `modes/`.
 
-## 当前目录
+## Current Directory
 
 ```text
 formula/
@@ -42,128 +42,128 @@ formula/
     png_renderer.py
 ```
 
-## 主链怎么走
+## How the Main Pipeline Works
 
-当前默认思路是：
+The current default approach is:
 
-1. 上游给出 `protected_text`、`formula_map`、`math_mode`
-2. `mode_router.py` 决定走哪条路径
-3. 如果是 `direct_typst`
-   直接走 `core/inline_math.py` + `core/markdown.py`
-4. 如果是 `placeholder`
-   走 `fallback/placeholder_markdown.py`
-5. 最终输出 markdown/plain-text，交给 layout / typst / redaction
+1. Upstream provides `protected_text`, `formula_map`, `math_mode`
+2. `mode_router.py` decides which path to take
+3. If `direct_typst`
+   Go directly through `core/inline_math.py` + `core/markdown.py`
+4. If `placeholder`
+   Go through `fallback/placeholder_markdown.py`
+5. Final output is markdown/plain-text, passed to layout/typst/redaction
 
-也就是说：
+In other words:
 
-- `mode_router.py` 只负责分发
-- `core/` 负责主链文本整理
-- `fallback/` 负责旧路径和兜底能力
+- `mode_router.py` is only responsible for routing
+- `core/` handles main pipeline text processing
+- `fallback/` handles old paths and fallback capabilities
 
-## 文件职责
+## File Responsibilities
 
 ### `mode_router.py`
 
-唯一职责：根据 `math_mode` 选择路径。
+Sole responsibility: select the path based on `math_mode`.
 
-现在只应该做：
+It should only do:
 
 - `item_render_math_mode`
 - `is_direct_typst_math_mode`
 - `build_render_markdown`
 - `build_item_render_markdown`
 
-不应该在这里堆公式清洗细节。
+Formula cleaning details should not be stacked here.
 
 ### `core/inline_math.py`
 
-负责 inline math 级别的轻量处理。
+Handles lightweight inline math level processing.
 
-主要是：
+Mainly:
 
-- 识别已有的 `$...$`
-- 只对非数学片段做文本替换
-- `direct_typst` 模式下做最小兼容清洗
-- 给行内公式补必要空格
+- Recognize existing `$...$`
+- Only perform text replacement on non-math segments
+- Perform minimal compatibility cleaning in `direct_typst` mode
+- Add necessary spacing for inline formulas
 
-这里应该保持轻量，不要塞 placeholder 逻辑。
+This should stay lightweight; do not add placeholder logic here.
 
 ### `core/markdown.py`
 
-负责主链 markdown 文本构建。
+Handles main pipeline markdown text construction.
 
-主要是：
+Mainly:
 
-- 从普通文本构建可渲染 markdown
-- 做 inline math 提升
-- 处理 citation-like 文本
-- 提供 plain-text 构建辅助
+- Build renderable markdown from plain text
+- Perform inline math promotion
+- Handle citation-like text
+- Provide plain-text construction helpers
 
-这里代表“当前主路径真正想保留的公式文本规则”。
+This represents "the formula text rules the current main path truly wants to keep."
 
 ### `fallback/placeholder_markdown.py`
 
-负责 placeholder 公式路径。
+Handles the placeholder formula path.
 
-输入通常是：
+Input is typically:
 
 - `protected_text`
 - `formula_map`
 
-职责是：
+Responsibilities:
 
-- 按 token 切分文本
-- 用 `formula_map` 回填公式
-- 必要时把 citation 还原成普通文本
-- 最后再调用主链的 markdown 文本整理
+- Split text by token
+- Backfill formulas using `formula_map`
+- When necessary, restore citations to plain text
+- Finally call the main pipeline's markdown text processing
 
-如果未来彻底去掉 placeholder，这个文件会继续缩小。
+If placeholders are fully removed in the future, this file will continue to shrink.
 
 ### `fallback/latex_normalizer.py`
 
-负责旧 LaTeX-ish 公式修补。
+Handles old LaTeX-ish formula fixes.
 
-它不是主链核心能力，而是兼容层：
+It's not a core main pipeline capability, but a compatibility layer:
 
-- 修正常见 OCR 噪声
-- 处理历史遗留格式
-- 给 placeholder / PNG fallback 提供更稳定的输入
+- Fix common OCR noise
+- Handle legacy format issues
+- Provide more stable input for placeholder/PNG fallback
 
-如果某条规则只服务老数据，不要放进 `core/`，放这里。
+If a rule only serves old data, don't put it in `core/`; put it here.
 
 ### `fallback/png_renderer.py`
 
-负责把单条公式转成 PNG。
+Handles converting individual formulas to PNG.
 
-这个能力主要给：
+This capability is mainly for:
 
-- redaction 路径
-- 某些公式无法直接按文本渲染时的兜底路径
+- The redaction path
+- A fallback path when certain formulas cannot be rendered directly as text
 
-它不代表主链。
+It does not represent the main pipeline.
 
-当前主链还是优先走文本 / direct typst，而不是把公式都转成图片。
+The current main pipeline still prioritizes text/direct typst rather than converting all formulas to images.
 
-## 依赖方向
+## Dependency Direction
 
-这一层必须遵守下面的依赖方向：
+This layer must follow the dependency direction below:
 
 - `mode_router -> core`
 - `mode_router -> fallback`
 - `fallback -> core`
-- `core` 不反向依赖 `fallback`
+- `core` must NOT reverse-depend on `fallback`
 
-也就是说：
+In other words:
 
-- `core` 只能放真正底层、稳定、主链的东西
-- `fallback` 可以调用 `core`
-- 不能让 `core` 再 import 回 `fallback`
+- `core` can only contain truly fundamental, stable, main-pipeline items
+- `fallback` can call `core`
+- `core` must not import back from `fallback`
 
-否则目录虽然拆了，实际还是耦合的。
+Otherwise, even though the directories are split, they remain coupled.
 
-## 对外暴露什么
+## What's Exposed Externally
 
-外部模块通常只应该依赖这些稳定口：
+External modules should typically only depend on these stable interfaces:
 
 - `services.rendering.formula.__init__`
 - `services.rendering.formula.mode_router`
@@ -173,7 +173,7 @@ formula/
 - `services.rendering.formula.fallback.latex_normalizer`
 - `services.rendering.formula.fallback.png_renderer`
 
-不要再引用已经删除的历史路径，比如：
+Do not reference deleted historical paths, such as:
 
 - `services.rendering.formula.math_utils`
 - `services.rendering.formula.normalizer`
@@ -181,23 +181,23 @@ formula/
 - `services.rendering.formula.shared.*`
 - `services.rendering.formula.modes.*`
 
-## 修改建议
+## Modification Guidelines
 
-如果以后再改这块，按这个顺序判断：
+If you need to modify this area in the future, use the following decision order:
 
-1. 这是主链必经逻辑吗？
-   如果是，优先放 `core/`
-2. 这是 placeholder / 旧 LaTeX / PNG fallback / 历史兼容吗？
-   如果是，放 `fallback/`
-3. 这是路径选择吗？
-   放 `mode_router.py`
-4. 这是测试坏例吗？
-   放到
+1. Is this main-pipeline mandatory logic?
+   If yes, preferentially place it in `core/`
+2. Is this placeholder / old LaTeX / PNG fallback / legacy compatibility?
+   If yes, place it in `fallback/`
+3. Is this path selection?
+   Place it in `mode_router.py`
+4. Is this a test bad case?
+   Place it in
    [`devtools/tests/translation/test_formula_math_markers.py`](/home/wxyhgk/tmp/Code/backend/scripts/devtools/tests/translation/test_formula_math_markers.py)
 
-## 当前你最该看的文件
+## Files You Should Read First
 
-如果你想快速理解这里，阅读顺序建议是：
+If you want to quickly understand this area, the recommended reading order is:
 
 1. [`mode_router.py`](/home/wxyhgk/tmp/Code/backend/scripts/services/rendering/formula/mode_router.py)
 2. [`core/markdown.py`](/home/wxyhgk/tmp/Code/backend/scripts/services/rendering/formula/core/markdown.py)
@@ -206,17 +206,17 @@ formula/
 5. [`fallback/latex_normalizer.py`](/home/wxyhgk/tmp/Code/backend/scripts/services/rendering/formula/fallback/latex_normalizer.py)
 6. [`fallback/png_renderer.py`](/home/wxyhgk/tmp/Code/backend/scripts/services/rendering/formula/fallback/png_renderer.py)
 
-## 当前状态
+## Current Status
 
-当前这块已经完成的整理是：
+The completed refactoring of this area includes:
 
-- `direct_typst` 主链和 placeholder 兜底链分开
-- `shared/`、`modes/` 这种假边界已经移除
-- `core` 与 `fallback` 的循环导入已经拆掉
+- Separated `direct_typst` main pipeline from placeholder fallback pipeline
+- Removed fake boundaries like `shared/` and `modes/`
+- Eliminated circular imports between `core` and `fallback`
 
-还剩下的非逻辑问题是：
+Remaining non-logic issues:
 
-- 目录里还有 `.ipynb_checkpoints`
-- 目录里还有 `__pycache__`
+- Directory still contains `.ipynb_checkpoints`
+- Directory still contains `__pycache__`
 
-这些不影响运行，但会影响阅读体验，后续可以直接清掉。
+These don't affect runtime but do affect readability; they can be cleaned up later.

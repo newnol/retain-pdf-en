@@ -1,51 +1,51 @@
-# Translation 说明
+# Translation Overview
 
-这一层只做一件事：把 OCR payload 变成可落盘、可回填、可渲染的翻译结果。
+This layer does only one thing: turn the OCR payload into a translatable, persistable, backfillable, and renderable translation result.
 
-这里不负责 PDF 读取和写回，也不负责 MinerU 解包。
+It is not responsible for PDF reading/writing, nor for MinerU unpacking.
 
-## 阶段边界
+## Stage Boundary
 
-Translation 阶段的正式输入和输出固定为：
+The formal input and output of the Translation stage are fixed as:
 
-- 输入：
-  `document.v1.json`、翻译策略参数、翻译输出目录
-- 输出：
-  逐页 translation payload、翻译摘要、翻译诊断
+- Input:
+  `document.v1.json`, translation policy parameters, translation output directory
+- Output:
+  Per-page translation payload, translation summary, translation diagnostics
 
-明确不负责的事情：
+Things it is explicitly not responsible for:
 
-- 不直接消费 provider raw JSON、zip 或 unpacked 目录
-- 不负责源 PDF 的页面写回、排版覆盖和最终 PDF 交付
-- 不负责 OCR provider 上传、轮询、下载和 normalize 产物生成
+- Does not directly consume provider raw JSON, zip, or unpacked directories
+- Does not handle source PDF page writing, layout overlay, or final PDF delivery
+- Does not handle OCR provider upload, polling, download, or normalize artifact generation
 
-当前稳定交接点：
+Current stable handoff points:
 
-- 上游 OCR 阶段应先把 provider 结果收敛成 `document.v1.json`
-- 下游渲染阶段应只消费这里落盘的翻译产物，不应再回头理解 OCR provider 私有字段
+- The upstream OCR stage should first converge provider results into `document.v1.json`
+- The downstream rendering stage should only consume the translation artifacts persisted here, and should not go back to understand OCR provider private fields
 
-当前默认翻译产物协议：
+Current default translation artifact protocol:
 
 - `translation-manifest.json`
-记录页索引到翻译 payload 文件的稳定映射，供渲染阶段优先读取
-  还会附带轻量元数据，例如 glossary 摘要、诊断摘要，以及 `invocation` 字段
-  当前正式路径统一标记为 `stage_spec`
-- 逐页 translation payload
-  当前仍按每页一个 JSON 落盘，manifest 负责声明这些文件该如何被渲染阶段发现
-- 阶段 spec
-  `translate-only` 入口已支持 `job_root/specs/translate.spec.json`（`translate.stage.v1`）
-- 调试产物
+  Records the stable mapping from page index to translation payload file, prioritized for consumption by the rendering stage.
+  Also carries lightweight metadata such as glossary summary, diagnostics summary, and the `invocation` field.
+  The current formal path is uniformly marked as `stage_spec`
+- Per-page translation payload
+  Currently still persisted as one JSON per page; the manifest is responsible for declaring how these files should be discovered by the rendering stage
+- Stage spec
+  The `translate-only` entry point already supports `job_root/specs/translate.spec.json` (`translate.stage.v1`)
+- Debug artifacts
   - `artifacts/translation_diagnostics.json`
   - `artifacts/translation_debug_index.json`
 
-## Translation Payload 口径
+## Translation Payload Scope
 
-逐页 translation payload 现在分成两层：
+Per-page translation payload is now split into two layers:
 
-1. 顶层 contract 字段
-2. `metadata` 调试/桥接字段
+1. Top-level contract fields
+2. `metadata` debug/bridge fields
 
-顶层 contract 字段包括：
+Top-level contract fields include:
 
 - `block_kind`
 - `layout_role`
@@ -57,137 +57,137 @@ Translation 阶段的正式输入和输出固定为：
 - `raw_block_type`
 - `normalized_sub_type`
 
-当前约定：
+Current conventions:
 
-- translation 的分类、style hint、policy、payload 回填和 diagnostics 主链优先只读这些顶层 contract 字段
-- `metadata` 可以继续保留，但职责只限于 debug、provider trace 和桥接 `continuation_hint/provider warning`
-- 新逻辑不要再把 `metadata.layout_role`、`metadata.semantic_role`、`metadata.structure_role` 当正式语义入口
-- 如果后续 block 语义变更，优先只改 `document.v1 -> TextItem -> payload` 这条 contract 投影，不要让下游模块各自再翻 `metadata`
+- Translation classification, style hints, policy, payload backfill, and the main diagnostics chain should prioritize reading only these top-level contract fields
+- `metadata` can be retained, but its responsibility is limited to debug, provider trace, and bridging `continuation_hint/provider warning`
+- New logic should no longer treat `metadata.layout_role`, `metadata.semantic_role`, `metadata.structure_role` as formal semantic entry points
+- If block semantics change in the future, prioritize modifying only the `document.v1 -> TextItem -> payload` contract projection; downstream modules should not independently dig through `metadata`
 
-兼容约定：
+Compatibility conventions:
 
-- 新任务目录应生成 `translation-manifest.json`
-- 翻译产物协议固定为 `translation-manifest.json` + 每页 payload，渲染阶段不再兼容旧的逐页 JSON 直扫模式
-- 默认加载口径已经是 strict contract；缺少上述顶层字段的 payload 会直接报错
-- Rust 主工作流调用的 `translate-only` worker 现在要求 `--spec`
-- `scripts/entrypoints/translate_book.py` 现在也是 spec-only 包装入口
-- API 凭证不再要求写入 stage spec；spec 中使用 `credential_ref`，由运行时环境注入真实 key
+- New job directories should generate `translation-manifest.json`
+- The translation artifact protocol is fixed as `translation-manifest.json` + per-page payload; the rendering stage no longer supports the legacy per-page JSON direct-scan mode
+- The default loading scope is now strict contract; payloads missing the above top-level fields will raise an error directly
+- The `translate-only` worker called by the Rust main workflow now requires `--spec`
+- `scripts/entrypoints/translate_book.py` is now also a spec-only wrapper entry point
+- API credentials no longer need to be written into the stage spec; specs use `credential_ref`, and the runtime environment injects the real key
 
-## 调试闭环
+## Debug Loop
 
-现在有一套最小可复现链路，专门用来定位“某个 item 为什么没翻 / 降级 / 保留原文”：
+There is now a minimal reproducible chain for locating "why a specific item was not translated / degraded / kept in original":
 
-1. 先看调试产物
-   - `translation_diagnostics.json` 看全局统计
-   - `translation_debug_index.json` 看 item 级索引
-2. 再看单 item
+1. First check debug artifacts
+   - `translation_diagnostics.json` for global statistics
+   - `translation_debug_index.json` for item-level index
+2. Then check individual items
    - `backend/scripts/devtools/replay_translation_item.py`
-3. 需要批量回归时再接 promptfoo
+3. For batch regression, connect promptfoo
    - `backend/scripts/devtools/promptfoo/`
-   - 先用 `scan_drift.py` 找 saved vs replay 漂移项，再用 `capture_case.py` 固化成 case artifact
+   - Use `scan_drift.py` to find saved vs replay drift items, then use `capture_case.py` to solidify into case artifacts
 
-Rust API 对应暴露了：
+The Rust API exposes the corresponding endpoints:
 
 - `GET /api/v1/jobs/{job_id}/translation/diagnostics`
 - `GET /api/v1/jobs/{job_id}/translation/items`
 - `GET /api/v1/jobs/{job_id}/translation/items/{item_id}`
 - `POST /api/v1/jobs/{job_id}/translation/items/{item_id}/replay`
 
-## 子目录
+## Subdirectories
 
 - `ocr/`
-  OCR JSON 读取和数据抽取。主线优先读取 `normalized_document_v1`，raw provider JSON 只在入口处先经过 adapter、defaults 和 schema 校验，再进入这里。
+  OCR JSON reading and data extraction. The main path prioritizes reading `normalized_document_v1`; raw provider JSON is first processed through adapter, defaults, and schema validation at the entry point before entering here.
 - `orchestration/`
-  布局区、continuation、translation unit 元数据。
+  Layout zones, continuation, translation unit metadata.
 - `classification/`
-  `precise` 模式下的可疑块分类。
+  Suspicious block classification under `precise` mode.
 - `continuation/`
-  段落连续性判断、candidate pair 导出和审阅。
+  Paragraph continuity detection, candidate pair export, and review.
 - `diagnostics/`
-  结构化翻译诊断模型，承接 placeholder 异常、窗口降级和 keep-origin 降级事件。
+  Structured translation diagnostics model, handling placeholder anomalies, window degradation, and keep-origin degradation events.
 - `policy/`
-  翻译策略配置和显式契约消费。默认主链不再靠本地规则二次猜 OCR 语义。
+  Translation policy configuration and explicit contract consumption. The default main chain no longer relies on local rules to second-guess OCR semantics.
 - `llm/`
-  模型请求、缓存、重试、placeholder 守护、分段路由和控制上下文。
-  新人先读 `llm/README.md`，里面单独说明了 provider 层、shared 层、编排层、兼容 shim 和关键调用链。
+  Model requests, caching, retries, placeholder guarding, segment routing, and control context.
+  New contributors should first read `llm/README.md`, which separately explains the provider layer, shared layer, orchestration layer, compatibility shims, and key call chains.
 - `payload/`
-  payload 协议、公式占位、翻译 JSON 读写。
+  Payload protocol, formula placeholders, translation JSON read/write.
 - `terms/`
-  术语表归一化、提示词注入和术语命中统计。
+  Glossary normalization, prompt injection, and term hit statistics.
 - `workflow/`
-  单页翻译流程入口。
+  Single-page translation workflow entry point.
 
-## 主要流程
+## Main Flow
 
-1. `ocr/` 读取统一中间层 `document.v1.json` 并抽取页面块
-2. 如果入口给的是 provider 原始 JSON，则先由 `document_schema/adapters.py` 转成 `document.v1`
-3. `workflow/translation_workflow.py` 生成每页翻译模板并加载 payload
-4. `orchestration` 补齐布局区和编排元数据
-5. `continuation` 先消费上游 `continuation_hint`，再用规则兜底，把连续段落合并成统一 translation unit
-6. `policy` 根据模式决定跳过哪些块
-7. `llm` 按 batch 调模型翻译、缓存和重试，并统一处理 placeholder/segment/fallback 控制
-8. `payload` 把翻译结果回填到 page payload，并保存最终 JSON
+1. `ocr/` reads the unified intermediate layer `document.v1.json` and extracts page blocks
+2. If the entry point receives provider raw JSON, `document_schema/adapters.py` first converts it to `document.v1`
+3. `workflow/translation_workflow.py` generates per-page translation templates and loads payload
+4. `orchestration` fills in layout zones and orchestration metadata
+5. `continuation` first consumes upstream `continuation_hint`, then uses rules as fallback to merge consecutive paragraphs into a unified translation unit
+6. `policy` determines which blocks to skip based on mode
+7. `llm` calls the model for batch translation, caching, and retries, and uniformly handles placeholder/segment/fallback control
+8. `payload` backfills translation results into page payload and saves the final JSON
 
-补充约定：
+Supplementary conventions:
 
-- translation 主线不应该直接理解某个 OCR provider 的 raw JSON 结构
-- translation 主线当前的默认落盘结果是“逐页 translation payload + translation-manifest.json”；这层负责产物内容和映射协议，不负责最终 PDF 文件名和渲染模式
-- `document.v1` 里凡是已经带 `skip_translation` tag 的块，必须在 `ocr/json_extractor.py` 抽取阶段就被挡掉，不能再漏进翻译候选
-- `abstract` 这类正文扩展语义可以继续进入翻译；`reference_entry`、`formula_number` 这类 provider 已明确标记跳过的块不应进入 payload
-- 抽取阶段优先读取显式 `content.kind / layout_role / semantic_role / structure_role / policy.translate`；默认主链不再从 `derived.role / sub_type / raw_type / tags` 反推正文
-- 抽取阶段会把 block 上的 `continuation_hint` 展开成 payload 里的 `ocr_continuation_*` 字段
-- continuation 当前采用 provider-first 策略：优先消费同页 `intra_page` provider hint；跨页 `cross_page` hint 只在“相邻页 + 顺序明确 + layout_zone 命中页尾/页首阅读边界 + 文本长度足够”时受控消费，其余情况继续保留但不直接驱动拼接
-- 如果只想排查 OCR 规范化是否有问题，优先看 `document.v1.report.json`
-- Python 侧读取 report 摘要时，优先走 `document_schema/reporting.py`
+- The translation main chain should not directly understand any OCR provider's raw JSON structure
+- The translation main chain's current default persisted result is "per-page translation payload + translation-manifest.json"; this layer is responsible for artifact content and mapping protocol, not for final PDF filename or rendering mode
+- Any block in `document.v1` that already carries a `skip_translation` tag must be blocked at the `ocr/json_extractor.py` extraction stage and must not leak into translation candidates
+- Body text extended semantics like `abstract` can continue into translation; blocks explicitly marked for skipping by the provider such as `reference_entry` and `formula_number` should not enter the payload
+- The extraction stage prioritizes reading explicit `content.kind / layout_role / semantic_role / structure_role / policy.translate`; the default main chain no longer infers body text from `derived.role / sub_type / raw_type / tags`
+- The extraction stage expands the `continuation_hint` on blocks into `ocr_continuation_*` fields in the payload
+- Continuation currently uses a provider-first strategy: prioritizes consuming same-page `intra_page` provider hints; cross-page `cross_page` hints are only consumed under controlled conditions ("adjacent pages + unambiguous ordering + layout_zone hits page-end/page-start reading boundary + sufficient text length"), otherwise retained but not directly driving concatenation
+- If you only want to troubleshoot whether OCR normalization has issues, prioritize checking `document.v1.report.json`
+- When reading report summaries on the Python side, prioritize going through `document_schema/reporting.py`
 
-默认正文白名单现在固定为：
+The default body text whitelist is now fixed as:
 
 - `content.kind == "text"`
-- 且 `policy.translate == true`
+- AND `policy.translate == true`
 
-这意味着：
+This means:
 
-- 正文是否进入翻译链，应该在 normalize / adapter 阶段决定
-- translation 默认主链不再重新猜 `footer/header/page_number/table/image/code/reference_content`
-- `ref_text`、`mixed_literal`、`metadata_fragment` 这类旧本地 skip / rewrite 规则已经退出默认主链
+- Whether body text enters the translation chain should be decided at the normalize / adapter stage
+- The translation default main chain no longer re-infers `footer/header/page_number/table/image/code/reference_content`
+- Legacy local skip/rewrite rules such as `ref_text`, `mixed_literal`, `metadata_fragment` have been removed from the default main chain
 
-## 术语表 v1
+## Glossary v1
 
-当前术语表链路分成两层输入：
+The current glossary chain is split into two input layers:
 
-- 命名术语表资源：由 Rust API 先落库，再通过 `glossary_id` 引用
-- 任务内 inline 术语：直接随任务一起传入 `glossary_entries`
+- Named glossary resources: first persisted by the Rust API, then referenced via `glossary_id`
+- Inline terms within a task: passed in directly with the task as `glossary_entries`
 
-进入 Python 之前，Rust 侧会先完成：
+Before entering Python, the Rust side first completes:
 
-- 术语条目归一化
-- 去重
-- 命名术语表与 inline 术语的合并
-- 相同 `source` 的覆盖统计
+- Glossary entry normalization
+- Deduplication
+- Merging of named glossary and inline terms
+- Coverage statistics for identical `source` entries
 
-Translation 阶段当前只做两件事：
+The Translation stage currently does only two things:
 
-- 把合并后的术语表注入到 LLM 控制上下文，作为翻译偏好提示
-- 在翻译结束后统计术语命中情况，并写入 `translation-manifest.json`、诊断文件和 pipeline summary
+- Injects the merged glossary into the LLM control context as a translation preference hint
+- After translation completes, tallies term hit statistics and writes them into `translation-manifest.json`, diagnostics files, and pipeline summary
 
-明确不做的事情：
+Things it explicitly does not do:
 
-- 不做翻译后强制替换
-- 不保证每个术语一定命中
-- 不直接解析 Excel 文件
+- Does not perform post-translation forced replacement
+- Does not guarantee every term will be hit
+- Does not directly parse Excel files
 
-## 模式说明
+## Mode Descriptions
 
 - `fast`
-  不启用分类器。
+  Classifier not enabled.
 - `sci`
-  面向论文和技术文档，还会做领域推断。
+  Oriented toward academic papers and technical documents; also performs domain inference.
 - `precise`
-  启用 LLM 分类器，只对可疑 OCR 块做额外判断。
+  Enables the LLM classifier; only performs additional judgment on suspicious OCR blocks.
 
-## Policy Config 兼容说明
+## Policy Config Compatibility Notes
 
-`policy/config.py` 里的 `build_translation_policy_config()` 目前还保留了几个旧字段，但它们已经不属于默认主链语义：
+`build_translation_policy_config()` in `policy/config.py` still retains several legacy fields, but they no longer belong to the default main chain semantics:
 
 - `enable_narrow_body_noise_skip`
 - `enable_metadata_fragment_skip`
@@ -195,23 +195,23 @@ Translation 阶段当前只做两件事：
 - `enable_reference_zone_skip`
 - `enable_reference_tail_skip`
 
-当前约定是：
+The current convention is:
 
-- 默认主链不会消费这些字段去重建旧 skip 逻辑
-- 它们当前只作为 deprecated compatibility surface 保留，主要避免老测试/老调用方立刻报错
-- 新代码不要再基于这些字段设计行为
+- The default main chain will not consume these fields to reconstruct legacy skip logic
+- They are currently retained only as a deprecated compatibility surface, mainly to prevent old tests/callers from immediately breaking
+- New code should not design behavior based on these fields
 
-注意：
+Note:
 
-- 这属于内部 Python translation policy contract，不是外部 HTTP API 契约
-- 真实的“是否翻译”主决策仍应来自 `document.v1` 的显式 block policy
+- This is an internal Python translation policy contract, not an external HTTP API contract
+- The real "whether to translate" decision should still come from the explicit block policy in `document.v1`
 
-## 协作规矩
+## Collaboration Guidelines
 
-如果翻译模块单独分人维护，这里只负责“把 `document.v1.json` 变成稳定翻译产物”。
+If the translation module is maintained by a separate person, this layer is only responsible for "turning `document.v1.json` into stable translation artifacts."
 
-- 允许在这里改策略、并发、术语表、LLM 调度、payload 落盘和翻译诊断
-- 不要在这里直接处理 provider raw OCR 结构，也不要把源 PDF 渲染逻辑塞回来
-- 当前正式输出协议是“逐页 translation payload + `translation-manifest.json`”；渲染层应只消费这套协议
-- 如果修改 payload 结构、manifest 字段语义或默认文件发现方式，必须同步更新 `runtime/pipeline`、`rendering`、README 和测试
-- 术语表当前是翻译提示约束，不是渲染层规则，也不是 OCR 层规则；不要把术语逻辑扩散到其他模块
+- Allowed to modify here: policy, concurrency, glossary, LLM scheduling, payload persistence, and translation diagnostics
+- Do not directly handle provider raw OCR structures here, and do not stuff source PDF rendering logic back in
+- The current formal output protocol is "per-page translation payload + `translation-manifest.json`"; the rendering layer should only consume this protocol
+- If you modify payload structure, manifest field semantics, or default file discovery, you must synchronize updates to `runtime/pipeline`, `rendering`, README, and tests
+- The glossary is currently a translation prompt constraint, not a rendering layer rule, nor an OCR layer rule; do not spread glossary logic to other modules

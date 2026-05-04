@@ -122,7 +122,7 @@ def main() -> None:
     with pipeline_event_writer_scope(event_writer):
         emit_stage_transition(
             stage="startup",
-            message="translate-from-ocr worker 已启动",
+            message="translate-from-ocr worker has started",
         )
         print(f"{STDOUT_LABEL_EVENTS_JSONL}: {event_writer.path}", flush=True)
         api_key = get_api_key(
@@ -131,7 +131,7 @@ def main() -> None:
         )
         emit_stage_transition(
             stage="translation_prepare",
-            message="开始准备翻译和渲染阶段",
+            message="Starting translation and rendering phase",
         )
         result = run_book_pipeline(
             source_json_path=source_json_path,
@@ -191,11 +191,11 @@ def main() -> None:
             artifact_key="pipeline_events_jsonl",
             path=event_writer.path,
             stage="saving",
-            message="统一事件流已写出",
+            message="Unified event stream written",
         )
         emit_stage_transition(
             stage="finished",
-            message="translate-from-ocr 全流程完成",
+            message="translate-from-ocr full pipeline completed",
         )
         print_pipeline_summary(
             job_root=job_dirs.root,

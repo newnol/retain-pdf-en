@@ -115,7 +115,7 @@ def main() -> None:
     with pipeline_event_writer_scope(event_writer):
         emit_stage_transition(
             stage="startup",
-            message="translate-only worker 已启动",
+            message="translate-only worker has started",
         )
         print(format_stdout_kv(STDOUT_LABEL_EVENTS_JSONL, event_writer.path))
         api_key = get_api_key(
@@ -124,7 +124,7 @@ def main() -> None:
         )
         emit_stage_transition(
             stage="translation_prepare",
-            message="开始准备纯翻译阶段",
+            message="Starting translation-only phase",
         )
         started = time.perf_counter()
         result = translate_book_pipeline(
@@ -172,13 +172,13 @@ def main() -> None:
             artifact_key="translation_diagnostics_json",
             path=diagnostics_path,
             stage="saving",
-            message="translation diagnostics 已发布",
+            message="translation diagnostics published",
         )
         emit_artifact_published(
             artifact_key="translation_debug_index_json",
             path=debug_index_path,
             stage="saving",
-            message="translation debug index 已发布",
+            message="translation debug index published",
         )
 
         schema_validation = build_validation_report_from_path(source_json_path)
@@ -233,11 +233,11 @@ def main() -> None:
             artifact_key="pipeline_events_jsonl",
             path=event_writer.path,
             stage="saving",
-            message="统一事件流已写出",
+            message="Unified event stream written",
         )
         emit_stage_transition(
             stage="finished",
-            message="translate-only 阶段完成",
+            message="translate-only phase completed",
         )
 
         print(format_stdout_kv(STDOUT_LABEL_JOB_ROOT, job_dirs.root))

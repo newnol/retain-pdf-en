@@ -25,15 +25,15 @@ def _item_math_mode(item: dict) -> str:
 
 def _direct_math_guidance() -> str:
     return (
-        "当前启用 direct_typst 公式直出模式。\n"
-        "请先理解整句语义，再直接输出中文译文。\n"
-        "凡是语义上属于公式、变量、上下标、数学表达式、化学式、物理量符号、带上标或下标的单位与记号，请主动用 `$...$` 包裹。\n"
-        "不要把裸露的 LaTeX 风格数学片段直接留在正文里。\n"
-        "普通正文不要随意放进 `$...$`。\n"
-        "如果 OCR 造成公式存在明显且局部的错误，例如空格错乱、括号缺失、花括号缺失、上下标脱落或命令被截断，你可以按语义做最小修复后再输出，使其可以正常渲染。\n"
-        "不要补写缺失的正文内容，不要扩写原文，不要编造新的科学信息。\n"
-        "不要输出占位符、JSON、标签、代码块或解释，只输出最终译文。\n"
-        "如果你脑中想返回 {\"translated_text\": ...} 或 {\"translations\": [...]}，请改成只输出其中的译文正文本身。"
+        "The direct_typst formula direct-output mode is currently enabled.\n"
+        "First understand the meaning of the entire sentence, then directly output the translated text.\n"
+        "For anything that semantically belongs to formulas, variables, subscripts/superscripts, mathematical expressions, chemical formulas, physical quantity symbols, or units and notations with superscripts or subscripts, proactively wrap them with `$...$`.\n"
+        "Do not leave bare LaTeX-style math fragments directly in the body text.\n"
+        "Do not arbitrarily place ordinary body text inside `$...$`.\n"
+        "If OCR introduces obvious and localized errors in formulas — such as scrambled spaces, missing parentheses, missing braces, dropped subscripts/superscripts, or truncated commands — you may apply minimal semantic fixes before outputting so that the formula renders correctly.\n"
+        "Do not fill in missing body text, do not expand the source text, and do not fabricate new scientific information.\n"
+        "Do not output placeholders, JSON, tags, code blocks, or explanations — only output the final translated text.\n"
+        "If you are thinking of returning {\"translated_text\": ...} or {\"translations\": [...]}, instead output only the translated body text itself."
     )
 
 
@@ -45,30 +45,30 @@ def _direct_typst_batch_user_prompt(
     lines: list[str] = [
         load_prompt("translation_task.txt"),
         "",
-        "下面是若干段待翻译正文。",
-        "你只输出每段的最终中文译文，不要回写 item_id、group_id、decision、JSON 或标签。",
+        "Below are several paragraphs of body text to be translated.",
+        "Only output the final translated text for each paragraph. Do not echo back item_id, group_id, decision, JSON, or tags.",
     ]
     for item in batch:
         lines.append("")
-        lines.append(f"原文 {item['item_id']}:")
+        lines.append(f"Source text {item['item_id']}:")
         lines.append(str(item.get("protected_source_text", "") or ""))
         style_hint = structure_style_hint(item)
         if style_hint:
-            lines.append(f"风格提示：{style_hint}")
+            lines.append(f"Style hint: {style_hint}")
         if mode == "sci":
             decision_hints = build_decision_hints(item)
             if decision_hints:
-                lines.append(f"翻译提示：{decision_hints}")
+                lines.append(f"Translation hint: {decision_hints}")
         if item.get("continuation_group"):
-            lines.append("这是跨栏或跨页续接正文的一部分，请结合上下文理解后直接输出这一整段的译文。")
+            lines.append("This is part of a cross-column or cross-page continuation. Understand the context and directly output the translation for this entire paragraph.")
         if item.get("continuation_prev_text"):
             context_before = sanitize_prompt_context_text(item["continuation_prev_text"])
             if context_before:
-                lines.append(f"前文上下文：{context_before}")
+                lines.append(f"Preceding context: {context_before}")
         if item.get("continuation_next_text"):
             context_after = sanitize_prompt_context_text(item["continuation_next_text"])
             if context_after:
-                lines.append(f"后文上下文：{context_after}")
+                lines.append(f"Following context: {context_after}")
     return "\n".join(lines).strip()
 
 
@@ -80,29 +80,29 @@ def _direct_typst_single_user_prompt(
     lines: list[str] = [
         load_prompt("translation_task.txt"),
         "",
-        "下面是一段待翻译正文。",
-        "你只输出最终中文译文正文，不要输出 item_id、group_id、decision、JSON、标签、代码块或解释。",
+        "Below is a paragraph of body text to be translated.",
+        "Only output the final translated body text. Do not output item_id, group_id, decision, JSON, tags, code blocks, or explanations.",
         "",
-        "原文：",
+        "Source text:",
         str(item.get("protected_source_text", "") or ""),
     ]
     style_hint = structure_style_hint(item)
     if style_hint:
-        lines.append(f"风格提示：{style_hint}")
+        lines.append(f"Style hint: {style_hint}")
     if mode == "sci":
         decision_hints = build_decision_hints(item)
         if decision_hints:
-            lines.append(f"翻译提示：{decision_hints}")
+            lines.append(f"Translation hint: {decision_hints}")
     if item.get("continuation_group"):
-        lines.append("这是跨栏或跨页续接正文的一部分，请结合上下文理解后直接输出这一整段的译文。")
+        lines.append("This is part of a cross-column or cross-page continuation. Understand the context and directly output the translation for this entire paragraph.")
     if item.get("continuation_prev_text"):
         context_before = sanitize_prompt_context_text(item["continuation_prev_text"])
         if context_before:
-            lines.append(f"前文上下文：{context_before}")
+            lines.append(f"Preceding context: {context_before}")
     if item.get("continuation_next_text"):
         context_after = sanitize_prompt_context_text(item["continuation_next_text"])
         if context_after:
-            lines.append(f"后文上下文：{context_after}")
+            lines.append(f"Following context: {context_after}")
     return "\n".join(lines).strip()
 
 

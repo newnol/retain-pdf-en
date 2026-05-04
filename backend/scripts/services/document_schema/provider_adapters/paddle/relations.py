@@ -91,9 +91,9 @@ def resolve_vision_footnote(
     previous_anchor: tuple[str, int] | None,
 ) -> tuple[str, str, list[str], dict]:
     lowered = text.lower()
-    if lowered.startswith("表注") or "table" in lowered:
+    if lowered.startswith("table note") or "table" in lowered:
         return "text", "table_footnote", ["footnote", "table_footnote"], {"footnote_target": "table"}
-    if lowered.startswith("图注") or "figure" in lowered:
+    if lowered.startswith("figure note") or "figure" in lowered:
         return "text", "image_footnote", ["footnote", "image_footnote"], {"footnote_target": "image"}
     if previous_anchor:
         target = previous_anchor[0]

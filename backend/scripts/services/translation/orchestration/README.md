@@ -1,18 +1,18 @@
-# Orchestration 说明
+# Orchestration Overview
 
-`scripts/services/translation/orchestration` 负责给 OCR payload 补齐“编排元数据”。
+`scripts/services/translation/orchestration` is responsible for supplementing OCR payloads with "orchestration metadata."
 
-它既不直接翻译，也不直接渲染，作用是把原始 OCR 块整理成更适合翻译和排版使用的中间状态。
+It neither directly translates nor directly renders; its role is to organize raw OCR blocks into an intermediate state more suitable for translation and typesetting use.
 
-## 主要文件
+## Main Files
 
 - `zones.py`
-  页面布局分析，识别单栏/双栏和布局区。
+  Page layout analysis, identifying single-column/double-column and layout zones.
 - `units.py`
-  生成和整理 `translation_unit_id`、`skip_reason` 等标准字段。
+  Generating and organizing standard fields such as `translation_unit_id` and `skip_reason`.
 - `document_orchestrator.py`
-  把布局区标注、candidate continuation review、元数据收口串起来。
+  Chains together layout zone annotation, candidate continuation review, and metadata closure.
 
-## 在总流程中的位置
+## Position in the Overall Flow
 
-`ocr payload -> orchestration -> translation policy / continuation / translation unit -> 翻译`
+`ocr payload -> orchestration -> translation policy / continuation / translation unit -> translation`

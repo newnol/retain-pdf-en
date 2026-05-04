@@ -226,21 +226,21 @@ def main() -> None:
     with pipeline_event_writer_scope(event_writer):
         emit_stage_transition(
             stage="startup",
-            message="provider worker 已启动",
+            message="provider worker has started",
             provider=provider,
         )
         print(f"{STDOUT_LABEL_EVENTS_JSONL}: {event_writer.path}", flush=True)
         if provider == "mineru":
             emit_stage_transition(
                 stage="ocr_processing",
-                message="开始执行 MinerU OCR provider 流程",
+                message="Starting MinerU OCR provider pipeline",
                 provider=provider,
             )
             job_dirs, source_pdf_path, layout_json_path, normalized_json_path = run_mineru_to_job_dir(args)
         elif provider == "paddle":
             emit_stage_transition(
                 stage="ocr_processing",
-                message="开始执行 Paddle OCR provider 流程",
+                message="Starting Paddle OCR provider pipeline",
                 provider=provider,
             )
             _, source_pdf_path, layout_json_path, normalized_json_path = run_paddle_to_job_dir(args)
@@ -255,7 +255,7 @@ def main() -> None:
         output_pdf_path = job_dirs.rendered_dir / translated_pdf_name
         emit_stage_progress(
             stage="normalization",
-            message="OCR provider 已完成，标准化文档已就绪",
+            message="OCR provider completed, normalized document ready",
             provider=provider,
         )
         api_key = get_api_key(
@@ -264,7 +264,7 @@ def main() -> None:
         )
         emit_stage_transition(
             stage="translation_prepare",
-            message="开始准备翻译和渲染阶段",
+            message="Starting translation and rendering phase",
             provider=provider,
         )
         result = run_book_pipeline(
@@ -324,11 +324,11 @@ def main() -> None:
             artifact_key="pipeline_events_jsonl",
             path=event_writer.path,
             stage="saving",
-            message="统一事件流已写出",
+            message="Unified event stream written",
         )
         emit_stage_transition(
             stage="finished",
-            message="provider-backed 全流程完成",
+            message="provider-backed full pipeline completed",
             provider=provider,
         )
         print_pipeline_summary(

@@ -1,72 +1,72 @@
-# OCR Provider API 说明
+# OCR Provider API Notes
 
-这一层专门描述“外部 OCR 服务怎么接进来”，不和当前翻译、渲染工作流耦合。
+This layer specifically describes "how external OCR services are integrated," and is decoupled from the current translation and rendering workflows.
 
-目标很明确：
+The goal is very clear:
 
-- 把第三方 OCR API 当成可替换 provider，而不是主流程的一部分
-- 让 MinerU、后续其他 OCR API、甚至本地 OCR，都走同一套接入思路
-- 把“调用 provider API”和“消费统一 schema”彻底分开
+- Treat third-party OCR APIs as replaceable providers rather than part of the main pipeline
+- Let MinerU, future OCR APIs, and even local OCR all follow the same integration approach
+- Thoroughly separate "calling provider APIs" from "consuming a unified schema"
 
-## 设计边界
+## Design Boundaries
 
-这一层负责：
+This layer is responsible for:
 
-- 定义 OCR provider 的能力边界
-- 定义 provider API 接入的最小抽象
-- 约定 provider 原始产物如何落盘
-- 约定 raw payload 如何进入 `document_schema` 适配链
+- Defining the capability boundaries of OCR providers
+- Defining the minimum abstraction for provider API integration
+- Conventions for how provider raw artifacts are persisted
+- Conventions for how raw payloads enter the `document_schema` adaptation chain
 
-这一层不负责：
+This layer is NOT responsible for:
 
-- 不负责翻译
-- 不负责 PDF 渲染
-- 不负责 Typst
-- 不负责正文块策略
-- 不负责任何 provider 特定 JSON 的业务消费
+- Translation
+- PDF rendering
+- Typst
+- Body block strategies
+- Any business consumption of provider-specific JSON
 
-## 核心原则
+## Core Principles
 
-1. 工作流只认统一 schema，不认 provider 原始 JSON
-   - 主链路 OCR 输入始终是 `document.v1.json`
-   - provider 原始 JSON 只能停留在 provider 层、adapter 层、调试层
+1. The workflow only recognizes unified schemas, not provider raw JSON
+   - The main pipeline OCR input is always `document.v1.json`
+   - Provider raw JSON can only exist in the provider layer, adapter layer, and debug layer
 
-2. provider API 是“采集层”，不是“业务层”
-   - 它的职责是把文件送出去、拿回结果、落盘
-   - 它不应该决定翻译模式、渲染模式、字体、公式保护、块策略
+2. The provider API is a "collection layer," not a "business layer"
+   - Its responsibility is to send files out, retrieve results, and persist them
+   - It should not determine translation mode, rendering mode, fonts, formula protection, or block strategies
 
-3. raw -> normalized 必须显式经过 adapter
-   - 任何 provider 返回结果，先进入 `services/document_schema/adapters.py`
-   - 不能直接让 `translation/ocr`、`rendering/` 去理解 provider JSON
+3. Raw -> normalized must explicitly go through an adapter
+   - Any provider return result first enters `services/document_schema/adapters.py`
+   - `translation/ocr` and `rendering/` cannot directly understand provider JSON
 
-4. provider 能力是可变的，统一 schema 才是稳定契约
-   - provider 可能变接口、变字段、变返回格式
-   - 主链路不要跟着这些变化一起抖
+4. Provider capabilities are variable; the unified schema is the stable contract
+   - Providers may change interfaces, fields, or return formats
+   - The main pipeline should not shake along with these changes
 
-## 推荐抽象
+## Recommended Abstraction
 
-如果后续要把 OCR API 层真正独立出来，建议最少拆成下面几类接口。
+If the OCR API layer is to be truly independent in the future, it is recommended to split it into at least the following categories of interfaces.
 
-### 1. Provider 能力声明
+### 1. Provider Capability Declaration
 
-每个 provider 先声明自己的能力边界，例如：
+Each provider first declares its own capability boundaries, for example:
 
-- 是否需要 token
-- 是否支持 URL 解析
-- 是否支持本地文件上传
-- 是否支持批量
-- 是否支持回调
-- 是否支持表格/公式开关
-- 文件大小上限
-- 页数上限
-- 支持的输入类型
-- 默认输出类型
+- Whether a token is required
+- Whether URL parsing is supported
+- Whether local file upload is supported
+- Whether batch processing is supported
+- Whether callbacks are supported
+- Whether table/formula toggles are supported
+- Maximum file size
+- Maximum page count
+- Supported input types
+- Default output types
 
-这部分是 provider metadata，不应散落在工作流判断里。
+This part is provider metadata and should not be scattered in workflow conditionals.
 
-### 2. Provider 任务接口
+### 2. Provider Task Interface
 
-统一成下面几类动作：
+Unify into the following categories of actions:
 
 - `submit_url_task(...)`
 - `submit_file_task(...)`
@@ -74,159 +74,159 @@
 - `download_result(...)`
 - `unpack_result(...)`
 
-注意这里仍然只是 provider API 语义，不是主流程语义。
+Note that this is still only provider API semantics, not main pipeline semantics.
 
-比如：
+For example:
 
-- `submit_*` 返回 provider task id / batch id
-- `poll_task` 返回 provider 当前状态
-- `download_result` 返回 zip / markdown / json / html 等原始产物
+- `submit_*` returns provider task id / batch id
+- `poll_task` returns the provider's current status
+- `download_result` returns zip/markdown/json/html and other raw artifacts
 
-### 3. Provider 原始产物约定
+### 3. Provider Raw Artifact Conventions
 
-provider 层只负责把原始结果整理成稳定落盘结构，例如：
+The provider layer is only responsible for organizing raw results into a stable persistence structure, for example:
 
 - `ocr/provider/<provider-name>/...`
 - `ocr/unpacked/...`
 - `ocr/provider_summary.json`
 
-不要在 provider 层直接假设：
+Do not assume at the provider layer that:
 
-- 一定有 `layout.json`
-- 一定有 `full.md`
-- 一定是 zip
-- 一定有表格和公式
+- `layout.json` always exists
+- `full.md` always exists
+- It's always a zip
+- Tables and formulas are always present
 
-这些都应当是 provider-specific artifact，而不是主流程前提。
+These should all be provider-specific artifacts, not main pipeline prerequisites.
 
-### 4. Raw -> Schema 适配入口
+### 4. Raw -> Schema Adaptation Entry Point
 
-provider 层产物一旦落盘，下一步只做一件事：
+Once provider layer artifacts are persisted, the next step does only one thing:
 
-- 调 `document_schema` adapter，产出：
+- Call the `document_schema` adapter to produce:
   - `document.v1.json`
   - `document.v1.report.json`
 
-到这里 provider 的职责就结束。
+At this point the provider's responsibility ends.
 
-## MinerU 作为一个 provider 的结论
+## MinerU as a Provider — Conclusions
 
-基于当前 MinerU API 文档，可以明确几点：
+Based on the current MinerU API documentation, several points can be clarified:
 
-1. MinerU 有两类 API
-   - 精准解析 API：token、异步、支持表格/公式、多格式输出、可批量
-   - Agent 轻量 API：免登录、异步、限制更紧、只给 Markdown
+1. MinerU has two types of APIs
+   - Precise parsing API: token required, async, supports tables/formulas, multi-format output, supports batching
+   - Agent lightweight API: no login required, async, stricter limits, only outputs Markdown
 
-2. 这两类 API 都不应该直接耦合主流程
-   - 它们只是不同的 provider transport / result shape
-   - 不是主链路的 OCR 契约
+2. Neither API should be directly coupled to the main pipeline
+   - They are just different provider transport/result shapes
+   - They are not the OCR contract of the main pipeline
 
-3. MinerU 真正适合进入主链路的只有两类东西
-   - 原始产物文件
-   - 通过 adapter 产出的 `document.v1`
+3. MinerU's outputs suitable for entering the main pipeline are only two types
+   - Raw artifact files
+   - `document.v1` produced through the adapter
 
-4. 不应该耦合进工作流的内容
-   - MinerU 的 task state 字面值
-   - MinerU 的 `layout.json` / `content_list_v2.json` 字段细节
-   - MinerU 的 zip 内部文件命名
-   - MinerU 的特定上传方式、batch 语义、callback 细节
-   - MinerU 的模型版本名直接参与翻译/渲染决策
+4. Content that should NOT be coupled into the workflow
+   - MinerU's task state literal values
+   - MinerU's `layout.json` / `content_list_v2.json` field details
+   - MinerU's zip internal file naming
+   - MinerU's specific upload methods, batch semantics, callback details
+   - MinerU's model version names directly participating in translation/rendering decisions
 
-## 当前项目里的落位建议
+## Placement Recommendations in the Current Project
 
-当前代码里可以按下面理解：
+The current codebase can be understood as follows:
 
 - `services/ocr_provider/provider_pipeline.py`
-  这是 provider-backed 全流程稳定入口；脚本、测试、兼容 patch 点都以它为边界
+  This is the provider-backed full pipeline stable entry point; scripts, tests, and compatibility patch points all use it as a boundary
 - `services/ocr_provider/paddle_api.py`
-  这是 Paddle transport / polling / result download
+  This is Paddle transport/polling/result download
 - `services/ocr_provider/paddle_markdown.py`
-  这是 Paddle Markdown 和图片产物落盘
+  This is Paddle Markdown and image artifact persistence
 - `services/ocr_provider/paddle_normalize.py`
-  这是 Paddle normalized document 几何修正等纯实现
+  This is Paddle normalized document geometry correction and other pure implementation
 - `services/mineru/`
-  这是 MinerU provider 的具体实现，不是“OCR 总入口”
+  This is the concrete implementation of the MinerU provider, not "the OCR master entry point"
 - `services/document_schema/`
-  这是 OCR 统一契约层
+  This is the OCR unified contract layer
 - `runtime/pipeline/`
-  这是业务编排层
+  This is the business orchestration layer
 
-后续如果接别的 OCR API，建议演进成下面的关系：
+If other OCR APIs are integrated in the future, the recommended evolution is:
 
 - `services/ocr_provider/`
-  只放 provider 接入规范与共享抽象
+  Only contains provider integration specifications and shared abstractions
 - `services/mineru/`
-  作为 `ocr_provider` 的一个具体实现
+  Serves as a concrete implementation under `ocr_provider`
 - `services/<other_ocr>/`
-  其他 provider 的具体实现
+  Concrete implementations of other providers
 - `services/document_schema/`
-  继续作为统一 normalized contract
+  Continues to serve as the unified normalized contract
 
-也就是说：
+In other words:
 
-- provider 可替换
-- adapter 可扩展
-- workflow 不需要理解 provider 差异
+- Providers are replaceable
+- Adapters are extensible
+- The workflow doesn't need to understand provider differences
 
-## 推荐接入步骤
+## Recommended Integration Steps
 
-新增 OCR provider 时，建议顺序如下：
+When adding a new OCR provider, the recommended order is:
 
-1. 先写 provider 能力说明
-2. 再写 provider API 调用层
-3. 把 provider 原始产物稳定落盘
-4. 写 `document_schema` adapter
-5. 补 fixture 和回归
-6. 最后才允许进入 translation/rendering 主线
+1. First write the provider capability specification
+2. Then write the provider API call layer
+3. Stably persist provider raw artifacts
+4. Write the `document_schema` adapter
+5. Add fixtures and regression tests
+6. Only then allow entry into the translation/rendering main pipeline
 
-如果第 4 步之前就让 provider 原始 JSON 进入主流程，后面一定继续耦合。
+If provider raw JSON enters the main pipeline before step 4, coupling will inevitably continue.
 
-## 对 MinerU 文档的工程化结论
+## Engineering Conclusions from MinerU Documentation
 
-从当前 MinerU API 文档看，最值得吸收的是这些抽象信息：
+Looking at the current MinerU API documentation, the most valuable abstract information to absorb includes:
 
-- 它是异步任务模型
-- 它区分 URL 提交和文件上传
-- 它区分批量和单文件
-- 它有 provider 自己的状态机
-- 它的原始产物不止一种
-- 它的能力上限和限制项非常明确
+- It uses an async task model
+- It distinguishes URL submission from file upload
+- It distinguishes batch from single file
+- It has its own provider state machine
+- Its raw artifacts come in more than one form
+- Its capability limits and restrictions are very clear
 
-这些应该进入 provider 层设计。
+These should enter the provider layer design.
 
-而下面这些不该进入主流程：
+The following should NOT enter the main pipeline:
 
-- 某个具体 HTTP 路径
-- 某个具体 JSON 字段名
-- 某个具体 zip 内文件名
-- 某个具体 provider 独有的模型名字
+- A specific HTTP path
+- A specific JSON field name
+- A specific file name within a zip
+- A specific provider-unique model name
 
-## 当前建议
+## Current Recommendation
 
-短期内不要把 `services/mineru/` 继续扩成“默认 OCR 平台层”。
+In the short term, do not continue expanding `services/mineru/` into a "default OCR platform layer."
 
-更稳的做法是：
+A more stable approach is:
 
-- 把它明确降级为“MinerU provider 实现”
-- 新增这一份 `ocr_provider/README.md` 作为总约定
-- 后续有新 OCR API 时，先对齐这份约定，再决定目录和 adapter
+- Explicitly downgrade it to "MinerU provider implementation"
+- Add this `ocr_provider/README.md` as the overarching convention
+- When new OCR APIs are added in the future, align with this convention first, then decide on directory structure and adapter
 
-这样后续切 OCR provider，不需要再拆翻译/渲染主线。
+This way, switching OCR providers in the future doesn't require splitting the translation/rendering main pipeline.
 
-## 当前实现约束
+## Current Implementation Constraints
 
-为了避免继续反复重构，当前 `ocr_provider/` 目录按下面规则维护：
+To avoid repeated refactoring, the current `ocr_provider/` directory is maintained under the following rules:
 
-- `provider_pipeline.py` 负责 stage/provider 分发和稳定兼容面
-- 新增的纯实现优先下沉到独立模块，不直接堆回 `provider_pipeline.py`
-- 如果测试需要 monkeypatch，patch 点应保留在 `provider_pipeline.py`
-- `services/ocr_provider/__init__.py` 必须显式导出 `provider_pipeline`
-- `paddle_api.py` 不处理 normalized schema
-- `paddle_markdown.py` 只处理 Markdown/图片产物，不碰翻译和渲染
-- `paddle_normalize.py` 只处理 normalized document 和几何修正，不碰 provider transport
+- `provider_pipeline.py` is responsible for stage/provider dispatching and stable compatibility surface
+- New pure implementations should preferentially be placed in independent modules, not stacked directly back into `provider_pipeline.py`
+- If tests need monkeypatching, patch points should be retained in `provider_pipeline.py`
+- `services/ocr_provider/__init__.py` must explicitly export `provider_pipeline`
+- `paddle_api.py` does not handle normalized schema
+- `paddle_markdown.py` only handles Markdown/image artifacts, not translation or rendering
+- `paddle_normalize.py` only handles normalized documents and geometry correction, not provider transport
 
-这些约束已经进入：
+These constraints have been incorporated into:
 
 - `backend/scripts/devtools/check_pipeline_architecture.py`
 
-也就是说，后面如果有人把 `ocr_provider` 重新连回翻译/渲染层，或者把稳定入口改成隐式导出/深层直连，本地架构检查会直接失败。
+In other words, if someone later reconnects `ocr_provider` back to the translation/rendering layer or changes the stable entry point to implicit exports/deep direct connections, the local architecture check will fail immediately.

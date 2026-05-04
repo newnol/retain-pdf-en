@@ -83,7 +83,7 @@ def write_pipeline_summary(
         artifact_key="pipeline_summary_json",
         path=summary_path,
         stage="saving",
-        message="已写出 pipeline summary",
+        message="Pipeline summary written",
     )
 
 
@@ -147,37 +147,37 @@ def print_pipeline_summary(
         artifact_key="source_pdf",
         path=source_pdf_path,
         stage="saving",
-        message="源 PDF 已登记",
+        message="Source PDF registered",
     )
     emit_artifact_published(
         artifact_key="layout_json",
         path=layout_json_path,
         stage="saving",
-        message="layout json 已发布",
+        message="layout json published",
     )
     emit_artifact_published(
         artifact_key="normalized_document_json",
         path=normalized_json_path,
         stage="saving",
-        message="标准化文档已发布",
+        message="Normalized document published",
     )
     emit_artifact_published(
         artifact_key="source_json_used",
         path=source_json_path,
         stage="saving",
-        message="翻译输入文档已登记",
+        message="Translation input document registered",
     )
     emit_artifact_published(
         artifact_key="translations_dir",
         path=Path(result["output_dir"]),
         stage="saving",
-        message="翻译目录已发布",
+        message="Translation directory published",
     )
     emit_artifact_published(
         artifact_key="output_pdf",
         path=Path(result["output_pdf_path"]),
         stage="saving",
-        message="最终 PDF 已发布",
+        message="Final PDF published",
     )
     print(f"pages processed: {result['pages_processed']}")
     print(f"translated items: {result['translated_items_total']}")
